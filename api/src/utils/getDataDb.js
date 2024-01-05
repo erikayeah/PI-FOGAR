@@ -1,5 +1,6 @@
 const getDataDb = (data) => {
-   const formattedDbPokemons = data.map((pokemon) => ({
+  
+   const dbPokemons = data.map((pokemon) => ({
      id: pokemon.id,
      name: pokemon.name,
      image: pokemon.image,
@@ -9,10 +10,10 @@ const getDataDb = (data) => {
      speed: pokemon.speed,
      height: pokemon.height,
      weight: pokemon.weight,
-     types: pokemon.types.map((type) => type.name),
+     types: pokemon.types.map((type) => type.name) // [ type, type ]
    }));
  
-   return formattedDbPokemons;
+   return dbPokemons;
  };
  
  module.exports = getDataDb;

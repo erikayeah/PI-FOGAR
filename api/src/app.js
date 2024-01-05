@@ -23,9 +23,10 @@ server.use((req, res, next) => {
   next();
 });
 
+
 server.use(cors()); //permitir que el frontend realice solicitudes a la API sin que el navegador bloquee esas solicitudes debido a las restricciones de seguridad.
 
-server.use('/', routes);
+server.use('/pokemon', routes);
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars

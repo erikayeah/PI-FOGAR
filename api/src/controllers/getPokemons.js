@@ -1,6 +1,6 @@
 // getPokemons.js
 // Obtiene un arreglo de objetos, donde cada objeto es un pokemon con su información.
-// { [], [], [] };
+// [ {name, url}, {name, url}, {name, url} ] ;
 
 const axios = require("axios");
 const { Pokemons, Type } = require("../db");
@@ -8,49 +8,44 @@ const getDataApi = require("../utils/getDataApi");
 const getDataDb = require("../utils/getDataDb");
 
 
-const urlApi = "https://pokeapi.co/api/v2/pokemon/";
-const urlEndpoint = urlApi;
+const URL = "https://pokeapi.co/api/v2/pokemon/";
+const limit = 70;
+let endpoint = URL
 
 const getPokemons = async () => {
-
    
-   try { 
-      
-      let apiPokemons = [];
+   let apiPokemonsUrl = [];
+   try {
 
-      //API
-
-      while (apiPokemons.length < 40) { //while less than 40, get pokemons.
-         const res = await axios.get(urlEndpoint);
-         apiPokemons.push(...res.data.results); // restuls: [{name : 'name'}, {url: 'URL'}] => url has the pokemons'data. 
-         urlEndpoint = res.data.next; // Move to the next page
+      //* From API
+      while (apiPokemonsUrl.length < limit) { //while less than 40, get pokemons.
+         const { data } = await axios.get(endpoint);
+         apiPokemonsUrl.push(...data.results); // restuls: [{name : 'name'}, {url: 'URL'}] => url has the pokemon's data. 
+         //* In this case, data.results is an array of objects, where each object represents the basic information of a Pokémon. Using the spread operator extracts and adds those objects individually to the apiPokemonsUrl array.
+         endpoint = data.next; // Move to the next page
       }
+      endpoint = URL; // Reset endpoint 
 
-      const pokemonDataPromises = apiPokemons.slice(0, 40).map((poke) => axios
-      .get(poke.url)
-      .then((res) => getDataApi(res.data)));
-      const allApiPokemons = await Promise.all (pokemonDataPromises);
-       
-      // const pokemonDataUrl = apiPokemons.slice(0, 40).map((pokemon) => axios.get(pokemon.url));
-      // const pokemonAllPromises = await Promise.all(pokemonDataUrl); //await all the primises are completed.
-      // const allApiPokemons = await Promise.all (
-      // pokemonAllPromises.map ((res) => getDataApi(res.data))
-      // );
+      const pokemonDataPromises = apiPokemonsUrl.map((poke) => axios  // Map every element in apiPokemonUrl. This is an [] of promises. Each promise is the data of one Pokemon from the API.
+      .get(poke.url) // Get the url prperty of each one.
+      .then((res) => getDataApi(res.data))); // Standardize data with getDataApi
+
+      const apiListPokemons = await Promise.all (pokemonDataPromises); // Returns a new promise when all promises in pokemonDataPromises are resolved o rejected.
+      // apiListPokemons = New array with the results.
+
       
-      //DDBB
-
+      //* From DDBB
       const dbPokemons = await Pokemons.findAll({ include: Type }); //Get from DB.
-      const dbFilteredPokemons = getDataDb(dbPokemons);
+      const dbFilteredPokemons = getDataDb(dbPokemons); //!Es necesario esto, si mi base de datos ya la tengo bien organizada?
 
-
-      const allPokemons = [ ...dbFilteredPokemons, ...allApiPokemons] // All pokemons together
+      //* API + DDBB
+      const allPokemons = [ ...dbFilteredPokemons, ...apiListPokemons] // Both [] together.
       return allPokemons;
-
+      
    } catch (error) {
-      res.status(500).send(error.message)
+      console.error("Error: ",error.message);
+      throw error;
    }
-
-
 };
 
 module.exports = getPokemons
