@@ -13,7 +13,7 @@ const getPokemonByName = async (name) => {
 
     const lowerCase = name.toLowerCase();
 
-    const localPokemons = await Pokemons.findAll({
+    const dbPokemon = await Pokemons.findAll({ // return an [].
       where: {
         name: {
           [Op.iLike]: `%${lowerCase}%`,
@@ -22,11 +22,10 @@ const getPokemonByName = async (name) => {
       include: [Type],
     });
 
-    if (localPokemons && localPokemons.length > 0) {
-      return localPokemons;
+    if (dbPokemon && dbPokemon.length > 0) {
+      return dbPokemon;
     } else {
-      const getPokemonByName = await axios(`${URL}${lowerCase}`);
-      const data = getPokemonByName.data;
+      const {data} = await axios(`${URL}/${lowerCase}`);
       const filteredData = await getData(data);
 
       return filteredData;
