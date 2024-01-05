@@ -3,8 +3,7 @@ const { Router } = require('express');
 const getPokemonsHandler = require("../handlers/getPokemonsHandler");
 const getPokemonByNameHandler = require("../handlers/getPokemonByNameHandler");
 const getPokemonByIdHandler = require("../handlers/getPokemonByIdHandler");
-//Descomentar a medida que las completo
-// const getPokemonByTypeHandler = require("../handlers/getPokemonByTypeHandler");
+const getTypesHandler = require("../handlers/getTypesHandler");
 const postPokemonHandler = require("../handlers/postPokemonHandler");
 
 
@@ -23,18 +22,11 @@ const postPokemonHandler = require("../handlers/postPokemonHandler");
 const router = Router();
 
 // Configurar los routers
-//* Descomentar a medida que las completo
-
-router.get("/", getPokemonsHandler); // Obtiene un arreglo de objetos, donde cada objeto es un pokemon con su información.
-
-//* Name primero que ID, porque si no, no funciona.
-router.get("/name", getPokemonByNameHandler); // Esta ruta debe obtener todos aquellos que coinciden con el nombre recibido por query.
-
-router.get("/:id", getPokemonByIdHandler); // Obtiene info de un pokemon especifico, ID llega por parametro.
-
-// router.get("/type", getPokemonByTypeHandler);
-
-router.post("/", postPokemonHandler); //Esta ruta recibirá todos los datos necesarios para crear un pokemon y relacionarlo con sus tipos solicitados.
+router.get("/", getPokemonsHandler); 
+router.post("/", postPokemonHandler); 
+router.get("/name", getPokemonByNameHandler);  
+router.get("/type", getTypesHandler);
+router.get("/:id", getPokemonByIdHandler); //* ID al final, si no las otras rutas no funcionan
 
 router.use((req, res, next) => {
    const error = new Error('Route not found');

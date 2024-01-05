@@ -18,7 +18,7 @@ const getPokemons = async () => {
    try {
 
       //* From API
-      while (apiPokemonsUrl.length < limit) { //while less than 40, get pokemons.
+      while (apiPokemonsUrl.length < limit) { //while less than 70, get pokemons.
          const { data } = await axios.get(endpoint);
          apiPokemonsUrl.push(...data.results); // restuls: [{name : 'name'}, {url: 'URL'}] => url has the pokemon's data. 
          //* In this case, data.results is an array of objects, where each object represents the basic information of a Pokémon. Using the spread operator extracts and adds those objects individually to the apiPokemonsUrl array.
@@ -28,7 +28,10 @@ const getPokemons = async () => {
 
       const pokemonDataPromises = apiPokemonsUrl.map((poke) => axios  // Map every element in apiPokemonUrl. This is an [] of promises. Each promise is the data of one Pokemon from the API.
       .get(poke.url) // Get the url prperty of each one.
-      .then((res) => getDataApi(res.data))); // Standardize data with getDataApi
+      .then((res) => getDataApi(res.data)) // Standardize data with getDataApi
+      .catch((error) => error.message));
+
+
 
       const apiListPokemons = await Promise.all (pokemonDataPromises); // Returns a new promise when all promises in pokemonDataPromises are resolved o rejected.
       // apiListPokemons = New array with the results.

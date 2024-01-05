@@ -7,25 +7,27 @@ const { Pokemons, Type } = require("../db.js");
 const getPokemonById = async (id) => {
   
    const URL = "https://pokeapi.co/api/v2/pokemon/";
-
-try {
+   let localPokemon;
 
    //* From API
    if (!isNaN(id)){ 
       const {data} = await axios(`${URL}/${id}`);
       const standardizedPokemonApi = await getDataApi(data);
       return standardizedPokemonApi;
-   };
+   }
 
    //  //* From DDBB
-   if (isNaN(id)){ 
-      
-   };
+   else {
+   localPokemon = await Pokemons.findOne({ where: { id: id }, include: Type });
+  
+    if (localPokemon) {
+      const localPokemonJSON = localPokemon.toJSON(); 
+      localPokemonJSON.types = localPokemon.types.map((type) => type.name); 
+      return localPokemonJSON; 
+    }
+   }
 
-} catch (error) {
-   console.error("Error: ",error.message);
-   throw error;
-}
+    throw Error("Pokemon not found");
 };
 
 module.exports = getPokemonById;

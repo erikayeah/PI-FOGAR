@@ -3,8 +3,6 @@ const getPokemonByName = require("../controllers/getPokemonByName");
 const getPokemonByNameHandler = async (req, res) => { 
 
    let {name} = req.query; 
-
-   console.log('Name recibido', name); //Recibe name ok
    
    try {
       const pokemonByName = await getPokemonByName(name);

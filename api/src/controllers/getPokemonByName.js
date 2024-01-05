@@ -7,24 +7,13 @@ const URL = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemonByName = async (name) => {
   
-  try {
-    if (!name) {
-      throw Error("Error: Name not defined");
-    }
+  if (name.length === 0) {
+    throw Error("Error name not defined");
+  }
 
-    const nameLowerCase = name.toLowerCase();
+    const lowerCase = name.toLowerCase();
 
-    //* API
-    const { data } = await axios.get(`${URL}/${nameLowerCase}`);
-
-    if (data) {
-       const filteredDataApi = await getDataApi(data);
-       return filteredDataApi;
-    }
-    
-    //* DDBB
-    //CODIGO PARA BUSCAR EN MI BASE DE DATOS
-    const pokemonNameDb = await Pokemons.findAll({
+    const localPokemons = await Pokemons.findAll({
       where: {
         name: {
           [Op.iLike]: `%${lowerCase}%`,
@@ -32,14 +21,17 @@ const getPokemonByName = async (name) => {
       },
       include: [Type],
     });
-    return pokemonNameDb;
 
+    if (localPokemons && localPokemons.length > 0) {
+      return localPokemons;
+    } else {
+      const getPokemonByName = await axios(`${URL}${lowerCase}`);
+      const data = getPokemonByName.data;
+      const filteredData = await getData(data);
 
-
-  } catch (error) {
-    console.error("Error: ", error.message);
-    throw error;
-  }
+      return filteredData;
+    }
+ 
 };
 
 module.exports = getPokemonByName;

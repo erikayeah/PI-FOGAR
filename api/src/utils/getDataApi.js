@@ -2,10 +2,13 @@ const getDataApi = async (data) => {
 
    const hpStat = data.stats.find((stat) => stat.stat.name === "hp");
    const hp = hpStat.base_stat;
+
    const attackStat = data.stats.find((stat) => stat.stat.name === "attack");
    const attack = attackStat.base_stat;
+
    const defenseStat = data.stats.find((stat) => stat.stat.name === "defense");
    const defense = defenseStat.base_stat;
+   
    const speedStat = data.stats.find((stat) => stat.stat.name === "speed");
    const speed = speedStat.base_stat;
    

@@ -1,17 +1,33 @@
-const { Pokemons, Type } = require('../db.js');
+const { Pokemons, Type } = require("../db.js");
+const axios = require ('axios')
 
-const postPokemon = async ({name, image, life, attack, defense, speed, height, weight, types}) => {
+const URL = "https://pokeapi.co/api/v2/pokemon/";
+
+const postPokemon = async ({ name, image, life, attack, defense, speed, height, weight, types }) => {
+
+  const existingPokemon = await Pokemons.findOne({ where: { name: name } });
+  if(existingPokemon){throw Error ('Pokemon with this name already exists')}
+
 
   try {
-    // Verificar si el Pokémon ya existe
-    const existingPokemon = await Pokemons.findOne({ where: { name: name } });
-
-    if (existingPokemon) {
-      return ( `${name} already exists`);
+    const response = await axios.get(`${URL}${name.toLowerCase()}`);
+    if (response.data) {
+      throw Error("Pokemon with this name already exists");
     }
+  } catch (error) {
+    if (error.response && error.response.status !== 404) {
+      throw error;
+    }
+  }
+    
+  let typesInstances = [];
+    
+   for (let typeName of types) {
+     let typeInstance = await Type.findOrCreate({ where: { name: typeName } });
+     typesInstances.push(typeInstance[0]);
+   }
 
-    // Crear el Pokémon
-    const newPokemon = await Pokemons.create({
+    let newPokemon = await Pokemons.create({
       name,
       image,
       life,
@@ -22,17 +38,10 @@ const postPokemon = async ({name, image, life, attack, defense, speed, height, w
       weight,
     });
 
-    // Obtener o crear los tipos y relacionarlos con el Pokémon
-    const typesInstances = await Promise.all(types.map(typeName => Type.findOrCreate({ where: { name: typeName } })));
+    await newPokemon.setTypes(typesInstances);
 
-    // Relacionar los tipos con el Pokémon
-    await newPokemon.setTypes(typesInstances.map(type => type[0]));
-
-    // Devolver la respuesta
-  } catch (error) {
-   console.error("Error: ",error.message);
-   throw error;
-}
+    return newPokemon;
+ 
 };
 
 module.exports = postPokemon;
