@@ -1,6 +1,5 @@
 const axios = require("axios");
 const getDataApi = require("../utils/getDataApi");
-const getDataDb =require("../utils/getDataDb")
 const { Pokemons, Type } = require("../db.js");
 
 

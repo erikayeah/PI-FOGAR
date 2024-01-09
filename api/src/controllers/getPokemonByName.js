@@ -26,7 +26,7 @@ const getPokemonByName = async (name) => {
       return dbPokemon;
     } else {
       const {data} = await axios(`${URL}/${lowerCase}`);
-      const filteredData = await getData(data);
+      const filteredData = await getDataApi(data);
 
       return filteredData;
     }
