@@ -1,30 +1,29 @@
+// Cards.js
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Card from "../card/Card";
+import styles from "../cards/Cards.module.css";
+import { fetchPokemons } from "../../redux/actions"; // Ajusta la ruta según tu estructura de archivos
 
-import Card from '../Card/Card';
-import style from './Cards.module.css';
+const Cards = () => {
+  const dispatch = useDispatch();
+  const pokemons = useSelector((state) => state.pokemons);
 
-const Cards = () => { //porque aca destructuring? porque en realidad, yo recibo props: { characters: [{}, {}, {}, etc, ]}. Characters llega como un objeto aca, un objeto que es mis props defaults digamos. Por eso aca si destructuro, porque tengo q sacar characters dentro del objeto donde llego.
-   return (
-      <div > 
+  useEffect(() => {
+    dispatch(fetchPokemons());
+  }, [dispatch]);
 
-         {/* { 
-         characters.map((char) => ( //Tmb podria ir con destructuring de las propiedades que quisiera q saque de cada char({name, status, gender, etc})
-         //OJO: Aca uso directo () para volver a jsx y renderizar codigo html entre los parentesis.
-             <Card
-                  key = {char.id} //Lakey aparece cuando creamos las tarjetitas, no en el componente Card, si no aca.
-                  id= {char.id}
-                  name = {char.name}
-                  status = {char.status}
-                  species = {char.species}
-                  gender = {char.gender}
-                  origin = {char.origin.name}
-                  image = {char.image}
-                  onClose={onClose}
-            />
-         )
-         )} */}
-      </div>
-      );
-}
+  const renderCards = () => {
+    if (!pokemons || pokemons.length === 0) {
+      return <p className={styles.text}>Oh... there is no pokemon to show</p>;
+    }
 
+    return pokemons.map((pokemon) => (
+      <Card key={pokemon.id} pokemon={pokemon} />
+    ));
+  };
+
+  return <div className={styles.container}>{renderCards()}</div>;
+};
 
 export default Cards;

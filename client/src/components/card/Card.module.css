@@ -1,0 +1,37 @@
+.container{ 
+   position: relative;
+   color: rgb(27, 1, 1);
+   border-radius: 13px;
+   border: 2px solid #DF3F80;
+   padding: 5px; 
+   width: 220px;
+   margin: 10px;
+   background-color: peru;
+
+   }
+
+   .image {
+      border-radius: 13px;
+      width: 50%;
+      height: 40%; /* Asegura que la altura se ajuste al contenedor */
+      margin: 5px;
+      border: 1px solid transparent;
+      position: relative;
+      background-color: indianred;
+      object-fit: scale-down; /* La propiedad clave para ajustar la imagen */
+      object-position: center; /* Asegura que la imagen se centre dentro del contenedor */
+    }
+
+    .image img {
+      width: 100%; /* Hace que la imagen ocupe el 100% del contenedor */
+      height: auto; /* Mantiene la proporción original de la imagen */
+    }
+
+     
+     .h2{
+     color: #0f1b00;
+     font-size: 18px;
+     border-radius: 50px;
+     padding: 5px;
+     margin: 10px;
+     }

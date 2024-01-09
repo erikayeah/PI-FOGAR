@@ -2,9 +2,10 @@
 import './App.css';
 
 //components
-import Cards from "../src/components/cards/Cards";
-import LandingPage from "../src/components/landingPage/LandingPage";
-// import HomePage from "../src/components/homePage/HomePage";
+import LandingPage from "../src/views/landingPage/LandingPage";
+import HomePage from "../src/views/homePage/HomePage";
+import DetailPage from "../src/views/detailPage/DetailPage";
+
 // import FormPage from "../src/components/formPage/FormPage";
 // import DetailPage from "../src/components/detailPage/DetailPage";
 
@@ -19,18 +20,15 @@ const App = () => {
 
 
   return (
-    <div className="App">
-      {/* Eliminar dsp de ver q cards funcione bien */}
-      <Cards/>
-
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/home" element={<HomePage />} />
-        <Route path="/create" element={<FormPage />} />
-        <Route path="/pokemon/:id" element={<DetailPage />} /> */}
-      </Routes>
-    </div>
-  );
+    
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/pokemon/:id" element={<DetailPage />} /> {/* Cambiado de 'component' a 'element' */}
+        </Routes>
+      </div>
+    );
 
 }
 

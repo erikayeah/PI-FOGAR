@@ -10,7 +10,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-   document.body.style.backgroundImage = `url('/src/assets/images/fondoHome.jpg')`;
+   document.body.style.backgroundImage = `url('/src/assets/images/fondoLanding2.gif')`;
    return () => {
      document.body.style.backgroundImage = null;
    };

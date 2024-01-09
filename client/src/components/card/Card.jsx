@@ -1,69 +1,35 @@
-import style from './Card.module.css';
-import {Link} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import { useState, useEffect } from 'react';
+import styles from "./Card.module.css";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch} from "react-redux";
+import { setSelectedPokemon} from "../../redux/actions";
+import axios from "axios";
 
-
-
-const Card = ({name, id, image, gender, status, species, origin, onClose}) => { //destructuring de las pripierdades del objeto props. si no seria props sin {}, y abajo props.name y asi.
-   
-   const dispatch = useDispatch();
-   const myFavorites = useSelector(state => state.myFavorites); //Tmb {myFavorites = useSelector (state => state)}, con destructuring.
+const Card = ({ pokemon }) => {
+  const dispatch = useDispatch();
   
-   const [isFav, setIsFav] = useState(false);
 
-   useEffect(() => {
-      myFavorites.forEach((fav) => {
-        if (fav.id === id) {
-          setIsFav(true);
-        }
-      });
-    }, [myFavorites]);
+  const { id, name, types, image, life, attack, defense, speed, height, weight,
+  } = pokemon;
 
-/* Version bucle for
-useEffect(() => {
-for ( let i = 0; i < myFavorites.length; i ++) {
-if (myFavorites[i].id === props.id) {
-   setIsFav(true)
-}}
-}, [myFavorites, props.id]
-*/
-
-   const handleFavorite = () => {
-      if (isFav) {
-         setIsFav(false);
-         dispatch(removeFav(id)); //Si yo no hubiera hecho destructuring ariba, esto seria props.id
-      } else {
-         setIsFav(true);
-         dispatch(addFav({name, id, gender,image, status, origin, species, onClose})); //Mismo caso si no hubiera hecho destructuring, seria props solo.
-      }
-   };
-/*Version en ternario
-   const handleFavorite = () => {
-   isFav ? (setIsFav(false), dispatch(removeFav(id))) : (setIsFav(true), dispatch(addFav(props)));
-}; */
-
+  const handleSeeMoreClick = async () => {
+   dispatch(setSelectedPokemon(pokemon));
+ };
+   
    
    return (
-      <div className={style.containerCard}>
+      <div className={styles.container}>
+      <h2 className={styles.h2}> {name} </h2>
+      <img className={styles.image} src={image} alt={name} />
+      <p>Type: {types.join(", ")}</p>
+      <Link to={`/pokemon/${id}`}>
+        <button className={styles.seeMoreButton} onClick={handleSeeMoreClick}> See more 
+     
+        </button>
+      </Link>
+    </div>
+  );
+};
 
-         {isFav ? (<button className={style.buttonCard} onClick={handleFavorite}>❤️</button> ) 
-         : (<button className={style.buttonCard} onClick={handleFavorite}>🤍</button>)}
-
-         {/* {pathname !== '/favorites' ? <button onClick={() => onClose(id) }> X </button> : ''} */}
-         < button className={style.buttonCard} onClick={() => onClose(id) }> ❌ </button>
-
-         <Link to={`/detail/${id}`} >
-         <img className = {style.imageCard} src={image} alt={name} />
-         </Link>
-         
-          <h2 className={style.nameCard}> {name}</h2>
-          { status === "Alive"  &&  <h3 className={style.h3}> 😊 {status}</h3>}
-          { status === "Dead"  && <h3 className={style.h3}> 😵 {status}</h3>}
-          { status === "unknown"  && <h3 className={style.h3}> 🤔 {status}</h3>}
-          
-      </div>
-   );
-}
 
 export default Card;
