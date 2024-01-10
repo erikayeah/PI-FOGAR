@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios'); // Importa axios aquí
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
@@ -41,6 +42,25 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Pokemons, Type } = sequelize.models;
 
+
+// Funtion to get Types from API 
+const initializeTypes = async () => {
+   try {
+     const response = await axios.get('https://pokeapi.co/api/v2/type/');
+     const typesFromAPI = response.data.results;
+ 
+     for (const typeFromAPI of typesFromAPI) {
+       await Type.findOrCreate({
+         where: { name: typeFromAPI.name },
+         defaults: { name: typeFromAPI.name },
+       });
+     }
+     console.log('Tipos inicializados correctamente');
+   } catch (error) {
+     console.error('Error al inicializar tipos:', error);
+   }
+ };
+
 // Aca vendrian las relaciones
 Pokemons.belongsToMany(Type, {through: 'pokemon_type'});
 Type.belongsToMany(Pokemons, { through: 'pokemon_type'});
@@ -48,5 +68,6 @@ Type.belongsToMany(Pokemons, { through: 'pokemon_type'});
 module.exports = {
    Pokemons,
    Type, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+   conn: sequelize,
+   initializeTypes // para importart la conexión { conn } = require('./db.js');
 };

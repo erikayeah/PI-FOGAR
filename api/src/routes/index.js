@@ -5,6 +5,7 @@ const getPokemonByNameHandler = require("../handlers/getPokemonByNameHandler");
 const getPokemonByIdHandler = require("../handlers/getPokemonByIdHandler");
 const getTypesHandler = require("../handlers/getTypesHandler");
 const postPokemonHandler = require("../handlers/postPokemonHandler");
+const { initializeTypes } = require("../db"); // Importa initializeTypes aquí
 
 
 //* Ruta => llama al Handler
@@ -21,9 +22,12 @@ const postPokemonHandler = require("../handlers/postPokemonHandler");
 
 const router = Router();
 
+// Llamada a initializeTypes al iniciar la aplicación
+initializeTypes();
+
 // Configurar los routers
 router.get("/", getPokemonsHandler); 
-router.post("/", postPokemonHandler); 
+router.post("/post", postPokemonHandler); 
 router.get("/name", getPokemonByNameHandler);  
 router.get("/type", getTypesHandler);
 router.get("/:id", getPokemonByIdHandler); //* ID al final, si no las otras rutas no funcionan
