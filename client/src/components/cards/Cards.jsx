@@ -1,25 +1,19 @@
 // Cards.js
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Card from "../card/Card";
 import styles from "../cards/Cards.module.css";
-import { fetchPokemons } from "../../redux/actions"; // Ajusta la ruta según tu estructura de archivos
+// Ajusta la ruta según tu estructura de archivos
 
-const Cards = () => {
-  const dispatch = useDispatch();
-  const pokemons = useSelector((state) => state.pokemons);
 
-  useEffect(() => {
-    dispatch(fetchPokemons());
-  }, [dispatch]);
+//* Card recibe los pokemons que Home decide pasarle. En home hago toda la logica de filtrado y demas.
+const Cards = ({pokemons}) => {
 
   const renderCards = () => {
     if (!pokemons || pokemons.length === 0) {
-      return <p className={styles.text}>Oh... there is no pokemon to show</p>;
+      return <p className={styles.text}> Oh... there are no Pokémon to show </p>;
     }
 
-    return pokemons.map((pokemon) => (
-      <Card key={pokemon.id} pokemon={pokemon} />
+    return pokemons.map((pokemon, index) => (
+      <Card key={index} pokemon={pokemon} />
     ));
   };
 

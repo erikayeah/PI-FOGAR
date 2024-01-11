@@ -16,12 +16,17 @@ import { FETCH_POKEMONS_SUCCESS,
   types: [], // Agrega un array para almacenar los types
   selectedPokemon: null,
   error: null,
+  searchResult: {
+    data: [], // Almacena los resultados de la búsqueda
+    error: null, // Almacena el error si ocurre
+  },
 };
 
 
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
+
     case FETCH_POKEMONS_SUCCESS:
       return {
         ...state,
@@ -42,7 +47,7 @@ const reducer = (state = initialState, action) => {
         selectedPokemon: action.payload,
       };
 
-
+//* Post
       case CREATE_POKEMON_SUCCESS:
       return {
         ...state,
@@ -56,6 +61,8 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
       };
 
+
+//* Get types in DDBB
 
       case FETCH_TYPES_SUCCESS:
       return {
@@ -71,6 +78,8 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
       };
 
+
+//* Delete pokemon
 
       case DELETE_POKEMON_SUCCESS:
         // Encuentra el índice del Pokémon eliminado en el array actual de pokémons
@@ -88,11 +97,13 @@ const reducer = (state = initialState, action) => {
         }
       
         return state;
+        
 case DELETE_POKEMON_FAILURE:
   return {
     ...state,
     error: action.payload,
   };
+
 
     default:
       return state;

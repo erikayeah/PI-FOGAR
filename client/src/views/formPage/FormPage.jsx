@@ -96,6 +96,18 @@ const FormPage = () => {
 
  dispatch(createPokemon(formData));
 
+ setFormData({
+  name: "",
+  image: "",
+  life: "",
+  attack: "",
+  defense: "",
+  speed: "",
+  height: "",
+  weight: "",
+  types: []
+});
+
  window.alert('Pokemon created successfully!'); //Error, sale siempre, salga bien o salga mal ...
 };
 

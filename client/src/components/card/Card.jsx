@@ -35,7 +35,7 @@ const Card = ({ pokemon }) => {
       <div className={styles.container}>
       <h2 className={styles.h2}> {name} </h2>
       <img className={styles.image} src={image} alt={name} />
-      <p>Type: {types.join(", ")}</p>
+      <p>Type: {types && types.join(", ")}</p>
       <Link to={`/pokemon/${id}`}>
         <button className={styles.seeMoreButton} onClick={handleSeeMoreClick}> See more </button>
 

@@ -14,7 +14,7 @@ import {
 
 const URL = 'http://localhost:3001/pokemon'   
 
-//* Get detail bi ID
+//* Get detail by ID
 export const setSelectedPokemon = (pokemon) => ({
    type: SET_SELECTED_POKEMON,
    payload: pokemon,
@@ -32,11 +32,9 @@ export const fetchPokemonsFailure = (error) => ({
   payload: error,
 });
 
-
 export const fetchPokemons = () => {
   return async (dispatch) => {
     try {
-
       const response = await axios.get(`${URL}`);
       dispatch(fetchPokemonsSuccess(response.data));
     } catch (error) {
@@ -90,3 +88,4 @@ export const deletePokemon = (id) => async (dispatch) => {
     dispatch(deletePokemonFailure(error.message));
   }
 };
+

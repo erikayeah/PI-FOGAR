@@ -12,11 +12,23 @@ const NavBar = () => {
 
       <div className = {styles.container}>
 
+      <div className = {styles.searchBar}>
          <SearchBar />
 
          <Link to={'/post'}>
          <button> Create Pokemon </button>
          </Link>
+
+      </div>
+
+      <div className = {styles.containerFilter}>
+         <h3>filtro por origen</h3>
+         <h3>filtro por type</h3>
+         <h3>Ordenar attack aand alfabeto 4 opciones select</h3>
+
+      </div>
+
+
 
       </div>
    )
