@@ -6,6 +6,8 @@ import { FETCH_POKEMONS_SUCCESS,
   CREATE_POKEMON_ERROR,
   FETCH_TYPES_SUCCESS, 
   FETCH_TYPES_FAILURE,
+  DELETE_POKEMON_SUCCESS, 
+  DELETE_POKEMON_FAILURE,
  } from "./action-types";
 
 
@@ -69,6 +71,28 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
       };
 
+
+      case DELETE_POKEMON_SUCCESS:
+        // Encuentra el índice del Pokémon eliminado en el array actual de pokémons
+        const indexToDelete = state.pokemons.findIndex(pokemon => pokemon.id === action.payload.id);
+      
+        // Si se encuentra el índice, elimina el Pokémon del array
+        if (indexToDelete !== -1) {
+          const updatedPokemons = [...state.pokemons];
+          updatedPokemons.splice(indexToDelete, 1);
+      
+          return {
+            ...state,
+            pokemons: updatedPokemons,
+          };
+        }
+      
+        return state;
+case DELETE_POKEMON_FAILURE:
+  return {
+    ...state,
+    error: action.payload,
+  };
 
     default:
       return state;

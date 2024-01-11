@@ -7,10 +7,12 @@ import {
   CREATE_POKEMON_SUCCESS,
   CREATE_POKEMON_ERROR, 
   FETCH_TYPES_SUCCESS,
-  FETCH_TYPES_FAILURE
+  FETCH_TYPES_FAILURE,
+  DELETE_POKEMON_SUCCESS, 
+  DELETE_POKEMON_FAILURE,
 } from "./action-types";
 
-const URL = 'http://localhost:3001/pokemon'
+const URL = 'http://localhost:3001/pokemon'   
 
 //* Get detail bi ID
 export const setSelectedPokemon = (pokemon) => ({
@@ -49,8 +51,7 @@ export const fetchPokemons = () => {
 export const createPokemon = (pokemonData) => async (dispatch) => {
   try {
     // Realiza la solicitud al servidor para crear el Pokémon
-    const response = await axios.post(`${URL}/post`, pokemonData);
-
+    const response = await axios.post(`${URL}/post`, pokemonData); //No entra a esta parte, porq no consologuea ningun console log de aca
     // Despacha alguna acción para manejar el resultado (puedes actualizar el estado de los Pokémon)
     dispatch({ type: CREATE_POKEMON_SUCCESS, payload: response.data });
   } catch (error) {
@@ -70,4 +71,22 @@ export const fetchTypes = () => async (dispatch) => {
 };
 
 
+//* Delete Pokemon
 
+export const deletePokemonSuccess = () => ({
+  type: DELETE_POKEMON_SUCCESS,
+});
+
+export const deletePokemonFailure = (error) => ({
+  type: DELETE_POKEMON_FAILURE,
+  payload: error,
+});
+
+export const deletePokemon = (id) => async (dispatch) => {
+  try {
+    await axios.delete(`${URL}/delete/${id}`);
+    dispatch(deletePokemonSuccess());
+  } catch (error) {
+    dispatch(deletePokemonFailure(error.message));
+  }
+};
