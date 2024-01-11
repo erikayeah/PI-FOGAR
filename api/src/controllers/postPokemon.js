@@ -6,6 +6,7 @@ const URL = "https://pokeapi.co/api/v2/pokemon/";
 const postPokemon = async ({ name, image, life, attack, defense, speed, height, weight, types }) => {
 
   const existingPokemon = await Pokemons.findOne({ where: { name: name } });
+  
   if(existingPokemon){throw Error ('Pokemon with this name already exists')}
 
 
@@ -27,16 +28,16 @@ const postPokemon = async ({ name, image, life, attack, defense, speed, height, 
      typesInstances.push(typeInstance[0]);
    }
 
-    let newPokemon = await Pokemons.create({
-      name,
-      image,
-      life,
-      attack,
-      defense,
-      speed,
-      height,
-      weight,
-    });
+   let newPokemon = await Pokemons.create({
+    name,
+    image,
+    life,
+    attack,
+    defense,
+    speed: speed || null, // Asignar null si no está presente
+    height: height || null, // Asignar null si no está presente
+    weight: weight || null, // Asignar null si no está presente
+  });
 
     await newPokemon.setTypes(typesInstances);
 

@@ -5,6 +5,7 @@ const getPokemonByNameHandler = require("../handlers/getPokemonByNameHandler");
 const getPokemonByIdHandler = require("../handlers/getPokemonByIdHandler");
 const getTypesHandler = require("../handlers/getTypesHandler");
 const postPokemonHandler = require("../handlers/postPokemonHandler");
+const deletePokemonHandler = require("../handlers/deletePokemonHandler");
 const { initializeTypes } = require("../db"); // Importa initializeTypes aquí
 
 
@@ -30,7 +31,11 @@ router.get("/", getPokemonsHandler);
 router.post("/post", postPokemonHandler); 
 router.get("/name", getPokemonByNameHandler);  
 router.get("/type", getTypesHandler);
+
+router.delete("/delete/:id", deletePokemonHandler);
+
 router.get("/:id", getPokemonByIdHandler); //* ID al final, si no las otras rutas no funcionan
+
 
 router.use((req, res, next) => {
    const error = new Error('Route not found');
