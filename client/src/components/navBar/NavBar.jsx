@@ -6,13 +6,16 @@ import styles from "../navBar/NavBar.module.css";
 
 const NavBar = () => {
 
-
-
    return (
 
       <div className = {styles.container}>
 
       <div className = {styles.searchBar}>
+
+      <Link to={'/home'}>
+         <button> Home </button>
+         </Link>
+
          <SearchBar />
 
          <Link to={'/post'}>

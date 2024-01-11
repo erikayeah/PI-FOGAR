@@ -2,6 +2,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import loadingGif from "../../assets/images/loading.gif";
+import { Link } from "react-router-dom";
 
 const DetailPage = () => {
   const selectedPokemon = useSelector((state) => state.selectedPokemon);
@@ -12,7 +13,6 @@ const DetailPage = () => {
   
   return (
     <div>
-
       <img src={selectedPokemon.image} alt="" />
       <div>
         <h2> {selectedPokemon.name} </h2>
@@ -26,6 +26,9 @@ const DetailPage = () => {
         <h3> Types: {selectedPokemon.types.join(", ")} </h3>
       </div>
 
+      <Link to={'/home'}>
+         <button> Home </button>
+         </Link>
 
     </div>
   );

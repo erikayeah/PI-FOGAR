@@ -1,43 +1,75 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../../components/navBar/NavBar";
 import Cards from "../../components/cards/Cards";
+import Pagination from "../../components/pagination/Pagination";
+import Loading from "../../components/loading/Loading";
 import { fetchPokemons } from "../../redux/actions"; 
 
-const HomePage = () => {
+const cardsPerPage = 12;
 
+const HomePage = () => {
   const dispatch = useDispatch();
-  const allPokemons = useSelector((state) => state.pokemons || []); // Los 80 primeros pokemones de la api
+  const allPokemons = useSelector((state) => state.pokemons || []); // Todos los pokemones de la API
+
+
+
+  
+  let currentPokemon = [];
+
+  const [loading, setLoading]  = useState(true); // Para loading
 
 
   useEffect(() => {
-    dispatch(fetchPokemons());
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchPokemons());
+      } catch (error) {
+        window.alert('Error al obtener los datos', error);
+        // Manejar el error si es necesario
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
 
-  let currentPokemon = []; //Array para pasar a Cards segun corresponda.
-  //!  Si por name 1 solo
-  
-  
-  
-  //! Si filtrados tal cosa
-  
-  
-  
-  //! Si no hay nada de name o filtro, todo
-  
-  currentPokemon = allPokemons
-  
-  console.log('que sale en current aca ', currentPokemon);
-//* Queda como opcion final, si no hay busqueda de name, si no hay busqueda de filtros seleccionada, que vengan todos
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+//! logica para traer nombre
+
+//! Logica para traer filtrados
 
 
+  //! Para todos los pokemons
+  const startIndex = (currentPage - 1) * cardsPerPage;
+  const endIndex = startIndex + cardsPerPage;
+  currentPokemon = allPokemons.slice(startIndex, endIndex);
 
+  const totalCards = allPokemons.length; // Usamos la longitud total de todos los pokémons
 
   return (
     <div>
-      <NavBar />
-      <Cards pokemons = {currentPokemon} />
+      {loading ? (
+        <Loading />
+        ) : (
+          <>
+          <NavBar />
+          <Pagination 
+            currentPage={currentPage}
+            cardsPerPage={cardsPerPage}
+            totalCards={totalCards}
+            onPageChange={onPageChange}
+          />
+          <Cards pokemons={currentPokemon} />
+        </>
+      )}
     </div>
   );
 };

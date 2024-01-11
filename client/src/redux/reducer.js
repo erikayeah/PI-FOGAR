@@ -20,6 +20,7 @@ import { FETCH_POKEMONS_SUCCESS,
     data: [], // Almacena los resultados de la búsqueda
     error: null, // Almacena el error si ocurre
   },
+  currentPage: 1, // Agrega el estado de la página actual
 };
 
 
@@ -97,13 +98,12 @@ const reducer = (state = initialState, action) => {
         }
       
         return state;
-        
+
 case DELETE_POKEMON_FAILURE:
   return {
     ...state,
     error: action.payload,
   };
-
 
     default:
       return state;

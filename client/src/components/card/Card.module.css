@@ -2,13 +2,83 @@
    position: relative;
    color: rgb(27, 1, 1);
    border-radius: 13px;
-   border: 2px solid #DF3F80;
    padding: 5px; 
    width: 220px;
    margin: 10px;
-   background-color: peru;
-
    }
+
+   .container.normal {
+    background-color: #b3b3b3; /* Color para el tipo normal */
+  }
+  
+  .container.fighting {
+    background-color: #c03028; /* Color para el tipo fighting */
+  }
+  
+  .container.flying {
+    background-color: #a890f0; /* Color para el tipo flying */
+  }
+  
+  .container.poison {
+    background-color: #a040a0; /* Color para el tipo poison */
+  }
+  
+  .container.ground {
+    background-color: #e0c068; /* Color para el tipo ground */
+  }
+  
+  .container.rock {
+    background-color: #b8a038; /* Color para el tipo rock */
+  }
+  
+  .container.bug {
+    background-color: #a8b820; /* Color para el tipo bug */
+  }
+  
+  .container.ghost {
+    background-color: #705898; /* Color para el tipo ghost */
+  }
+  
+  .container.steel {
+    background-color: #b8b8d0; /* Color para el tipo steel */
+  }
+  
+  .container.fire {
+    background-color: #f08030; /* Color para el tipo fire */
+  }
+  
+  .container.water {
+    background-color: #6890f0; /* Color para el tipo water */
+  }
+  
+  .container.grass {
+    background-color: #78c850; /* Color para el tipo grass */
+  }
+  
+  .container.electric {
+    background-color: #f8d030; /* Color para el tipo electric */
+  }
+  
+  .container.psychic {
+    background-color: #f85888; /* Color para el tipo psychic */
+  }
+  
+  .container.ice {
+    background-color: #98d8d8; /* Color para el tipo ice */
+  }
+  
+  .container.dragon {
+    background-color: #7038f8; /* Color para el tipo dragon */
+  
+  }
+  
+  .container.dark {
+    background-color: #705848; /* Color para el tipo dark */
+  }
+  
+  .container.fairy {
+    background-color: #ee99ac; /* Color para el tipo fairy */
+  }
 
    .image {
       border-radius: 13px;
@@ -17,7 +87,6 @@
       margin: 5px;
       border: 1px solid transparent;
       position: relative;
-      background-color: indianred;
       object-fit: scale-down; /* La propiedad clave para ajustar la imagen */
       object-position: center; /* Asegura que la imagen se centre dentro del contenedor */
     }

@@ -88,4 +88,3 @@ export const deletePokemon = (id) => async (dispatch) => {
     dispatch(deletePokemonFailure(error.message));
   }
 };
-
