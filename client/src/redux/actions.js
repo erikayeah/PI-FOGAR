@@ -10,6 +10,10 @@ import {
   FETCH_TYPES_FAILURE,
   DELETE_POKEMON_SUCCESS, 
   DELETE_POKEMON_FAILURE,
+  FILTER_BY_ORIGIN,
+  FILTER_BY_TYPE,
+  RESET_FILTERED_POKEMONS,
+  SORT_POKEMONS,
 } from "./action-types";
 
 const URL = 'http://localhost:3001/pokemon'   
@@ -44,6 +48,7 @@ export const fetchPokemons = () => {
   };
 };
 
+
 //* Creacion pokemon
 
 export const createPokemon = (pokemonData) => async (dispatch) => {
@@ -58,7 +63,7 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
   }
 };
 
-//*Obtener typos
+//* Obtener types
 export const fetchTypes = () => async (dispatch) => {
   try {
     const response = await axios.get(`${URL}/type`); // Reemplaza '/api/types' con la ruta correcta de tu API para obtener los types.
@@ -88,3 +93,46 @@ export const deletePokemon = (id) => async (dispatch) => {
     dispatch(deletePokemonFailure(error.message));
   }
 };
+
+//* Filtered by Origin
+
+export const filterByOrigin = (origin) => {
+  return (dispatch) => {
+    dispatch({
+      type: FILTER_BY_ORIGIN,
+      payload: origin,
+    });
+  };
+};
+
+//* Filtered by Type
+
+export const filterByType = (pokemonType) => {
+  return (dispatch) => {
+    if (pokemonType === "ALL") {
+      // Si elige "ALL", no aplicar ningún filtro y restablecer el filtro de origen
+      dispatch({
+        type: FILTER_BY_TYPE,
+        payload: null,
+      });
+    } else {
+    dispatch({
+      type: FILTER_BY_TYPE,
+      payload: pokemonType,
+    });
+  };
+  }}
+
+
+  //* Reset filter
+  export const resetFilteredPokemons = () => ({
+    type: RESET_FILTERED_POKEMONS,
+  });
+
+  //* Ordenamiento
+  export const sortPokemons = (sortBy, sortOrder) => {
+    return {
+      type: SORT_POKEMONS,
+      payload: { sortBy, sortOrder },
+    };
+  };

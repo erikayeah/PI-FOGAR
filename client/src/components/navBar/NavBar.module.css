@@ -2,13 +2,24 @@
    background-color: blueviolet;
    align-items: center;
    align-content: center;
+   padding: 5px;
    }
 
    .containerFilter {
       background-color: rgb(182, 142, 219);
       display: flex;
       justify-content: space-evenly; /* Ajusta esta línea */
+      padding: 5px;
     }
+
+    .containerReset {
+      background-color: rgb(145, 127, 161);
+      display:flex;
+      justify-content: space-evenly; /* Ajusta esta línea */
+      font-size: 18 px;
+      padding: 5px;
+    }
+
 
     .searchBar{
       background-color: rgb(59, 27, 89);

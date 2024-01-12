@@ -9,18 +9,8 @@ const FormPage = () => {
   
       
    const dispatch = useDispatch();
-   const types = useSelector(state => state.types);
+   const types = useSelector(state => state.types); // Ya agregados al renderizar HomePage.
 
-
-  useEffect(() => {
-   const fetchTypesData = async () => {
-      await dispatch(fetchTypes());
-
-   };
-
-   fetchTypesData();
-}, [dispatch]);
-   
 
    const [formData, setFormData] = useState({
    name: "",

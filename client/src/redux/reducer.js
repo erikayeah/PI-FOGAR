@@ -8,6 +8,10 @@ import { FETCH_POKEMONS_SUCCESS,
   FETCH_TYPES_FAILURE,
   DELETE_POKEMON_SUCCESS, 
   DELETE_POKEMON_FAILURE,
+  FILTER_BY_ORIGIN,
+  FILTER_BY_TYPE,
+  RESET_FILTERED_POKEMONS,
+  SORT_POKEMONS,
  } from "./action-types";
 
 
@@ -16,12 +20,12 @@ import { FETCH_POKEMONS_SUCCESS,
   types: [], // Agrega un array para almacenar los types
   selectedPokemon: null,
   error: null,
-  searchResult: {
-    data: [], // Almacena los resultados de la búsqueda
-    error: null, // Almacena el error si ocurre
-  },
-  currentPage: 1, // Agrega el estado de la página actual
+  filteredPokemons: [],
+  isFiltered: false,
+  sorted:[],
+  reset: false
 };
+
 
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +51,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         selectedPokemon: action.payload,
       };
+
 
 //* Post
       case CREATE_POKEMON_SUCCESS:
@@ -104,6 +109,64 @@ case DELETE_POKEMON_FAILURE:
     ...state,
     error: action.payload,
   };
+
+
+  //* Filtered 
+  
+  case FILTER_BY_ORIGIN:
+    return {
+      ...state,
+      isFiltered: action.payload !== "ALL",
+      filteredPokemons: action.payload === "ALL" ? [] : state.pokemons.filter((pokemon) => (action.payload === "API" ? typeof pokemon.id === "number" : typeof pokemon.id === "string")),
+  };
+
+
+  case FILTER_BY_TYPE:
+      return {
+        ...state,
+        isFiltered: action.payload !== "ALL",
+        filteredPokemons: action.payload === "ALL" ? allPokemons : state.pokemons.filter((pokemon) => {
+          if (!pokemon.types) return false;
+          return pokemon.types.some(
+            (type) => (typeof type === "string" ? type === action.payload : type.name === action.payload)
+          );
+        }),
+      };
+
+  //* Reset filter
+
+  case RESET_FILTERED_POKEMONS:
+    return {
+      ...state,
+      isFiltered: false,
+      filteredPokemons: [],
+      sorted:[],
+    };
+
+
+
+  //* Ordenamiento
+
+  case SORT_POKEMONS:
+  const { sortBy, sortOrder } = action.payload;
+  let sortedPokemons = state.isFiltered ? [...state.filteredPokemons] : [...state.pokemons];
+
+  if (sortBy === "id") {
+    sortedPokemons.sort((a, b) => {
+      const idA = typeof a.id === 'string' ? a.id : String(a.id);
+      const idB = typeof b.id === 'string' ? b.id : String(b.id);
+
+      return sortOrder === "asc" ? idA.localeCompare(idB) : idB.localeCompare(idA);
+    });
+  } else if (sortBy === "attack") {
+    sortedPokemons.sort((a, b) => (sortOrder === "asc" ? a.attack - b.attack : b.attack - a.attack));
+  }
+
+  return {
+    ...state,
+    filteredPokemons: sortedPokemons,
+};
+
 
     default:
       return state;
