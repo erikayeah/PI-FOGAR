@@ -9,7 +9,7 @@ const getDataDb = require("../utils/getDataDb");
 
 
 const URL = "https://pokeapi.co/api/v2/pokemon/";
-const limit = 150;
+const limit = 250;
 let endpoint = URL
 
 const getPokemons = async () => {
