@@ -15,6 +15,7 @@ import {
   RESET_FILTERED_POKEMONS,
   SORT_POKEMONS,
   SEARCH_POKEMON,
+  RESET_NAME,
 } from "./action-types";
 
 const URL = 'http://localhost:3001/pokemon'   
@@ -32,6 +33,7 @@ export const setSelectedPokemon = (pokemon) => ({
   try {
     const response = await axios.get(`${URL}/name?name=${name}`);
     const data = response.data
+    console.log('data de actionr', data);
 
     dispatch({ type: SEARCH_POKEMON, payload: data });
     
@@ -75,7 +77,7 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
     dispatch({ type: CREATE_POKEMON_SUCCESS, payload: response.data });
   } catch (error) {
     // Despacha alguna acción para manejar errores
-    dispatch({ type: CREATE_POKEMON_ERROR, payload: error.message });
+    dispatch(CREATE_POKEMON_ERROR);
   }
 };
 
@@ -143,6 +145,11 @@ export const filterByType = (pokemonType) => {
   //* Reset filter
   export const resetFilteredPokemons = () => ({
     type: RESET_FILTERED_POKEMONS,
+  });
+
+  //* Reset NAme
+  export const resetName = () => ({
+    type: RESET_NAME,
   });
 
   //* Ordenamiento

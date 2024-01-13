@@ -10,10 +10,12 @@ import { fetchPokemons, fetchTypes, filterByOrigin, sortPokemons } from "../../r
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const allPokemons = useSelector((state) => state.pokemons || []);
-  const filteredPokemons = useSelector((state) => state.filteredPokemons);
-  const sorted = useSelector((state) => state.sorted);
-  const searchResults = useSelector((state) => state.searchResults);
+  const allPokemons = useSelector((state) => state.pokemons || []); //Todos los pokemones 
+  const filteredPokemons = useSelector((state) => state.filteredPokemons); // El resultado de los filtros
+  const sorted = useSelector((state) => state.sorted); 
+  const searchResults = useSelector((state) => state.searchResults); //El resultado de buscar por nombre
+
+  console.log('resultados en home', searchResults);
 
 
   //* Loading
@@ -52,25 +54,23 @@ const HomePage = () => {
   
 
   if (Array.isArray(searchResults) && searchResults.length > 0) {
-    // Si es un array, toma el primer elemento
-    const pokemonResult = searchResults[0];
-  
-    if (pokemonResult.id) {
-      // Si el primer elemento tiene la propiedad 'id', añádelo a pokemonList
-      pokemonList.push(pokemonResult);
-    }
+    // Desde la DDBB llega como array
+    pokemonList = searchResults;
+  } else if (typeof searchResults === 'object' && Object.keys(searchResults).length > 0) {
+    // Si searchResults es un objeto, considéralo como un solo resultado
+    pokemonList = [searchResults];
+  } else if (filteredPokemons.length > 0 || sorted.length > 0) {
+    // Si hay resultados filtrados o ordenados, úsalos
+    totalCards = filteredPokemons.length || sorted.length;
+    pokemonList = (filteredPokemons.length > 0 ? filteredPokemons : sorted).slice(
+      (currentPage - 1) * cardsPerPage,
+      currentPage * cardsPerPage
+    );
+  } else {
+    // Si no hay resultados de búsqueda, filtrado o API, muestra todos los pokemones
+    totalCards = allPokemons.length;
+    pokemonList = allPokemons.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
   }
-
-else if (filteredPokemons.length > 0 || sorted.length > 0) {
-  totalCards = filteredPokemons.length || sorted.length;
-  pokemonList = (filteredPokemons.length > 0 ? filteredPokemons : sorted).slice(
-    (currentPage - 1) * cardsPerPage,
-    currentPage * cardsPerPage
-  );
-} else {
-  totalCards = allPokemons.length;
-  pokemonList = allPokemons.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
-}
 
 console.log('como queda pokemonlist' ,pokemonList); // [ {id, name, image, etc} ] 
 

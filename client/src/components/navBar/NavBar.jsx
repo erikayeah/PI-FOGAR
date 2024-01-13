@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "../navBar/NavBar.module.css";
-import {filterByOrigin, filterByType, sortPokemons, resetFilteredPokemons, fetchPokemons} from '../../redux/actions';
+import {filterByOrigin, filterByType, sortPokemons, resetFilteredPokemons, fetchPokemons, searchPokemonByName} from '../../redux/actions';
 
 
 
@@ -37,6 +37,7 @@ const handleTypeFilter = (event) => {
    dispatch(fetchPokemons());
  }
 
+
  const handleSortChange = (event) => {
    const value = event.target.value;
    // Dejamos que el valor sea directamente el objeto
@@ -51,7 +52,7 @@ const handleTypeFilter = (event) => {
       <div className = {styles.searchBar}>
 
       <Link to={'/home'}>
-         <button> Home </button>
+         <button onClick={handleClearFilter }> Home </button>
          </Link>
 
          <SearchBar />

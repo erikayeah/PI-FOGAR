@@ -3,21 +3,24 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch} from "react-redux";
 import { setSelectedPokemon} from "../../redux/actions";
-import { deletePokemon } from '../../redux/actions';
-import axios from "axios";
+import { deletePokemon, resetName } from '../../redux/actions';
 
 const Card = ({ pokemon }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();  // Cambiar a useNavigate
   
+console.log('pokemon en card', pokemon);
 
   const { id, name, types, image, life, attack, defense, speed, height, weight,
   } = pokemon;
 
-  const firstType = types && types.length > 0 ? types[0] : null;
+// Normalización de la propiedad types
+const normalizedTypes = types.map((type) =>
+typeof type === "string" ? { name: type } : type
+);
 
-
-  let joinTypes = types.join(', ')
+const firstType = normalizedTypes.length > 0 ? normalizedTypes[0].name : null;
+  const typeNames = normalizedTypes.map((type) => type.name).join(", ");
 
   const handleSeeMoreClick = async () => {
    dispatch(setSelectedPokemon(pokemon));
@@ -35,12 +38,18 @@ const Card = ({ pokemon }) => {
     // Lógica de manejo de errores si es necesario
   }
 };
+
+const handleClearName = () => {
+  dispatch(resetName());
+}
+
+
    
    return (
     <div className={`${styles.container} ${styles[firstType]}`}>
       <h2 className={styles.h2}> {name} </h2>
       <img className={styles.image} src={image} alt={name} />
-      <p>Type: {joinTypes}</p>
+      <p>Type: {typeNames}</p>
       <Link to={`/pokemon/${id}`}>
         <button className={styles.seeMoreButton} onClick={handleSeeMoreClick}> See more </button>
 
@@ -48,6 +57,9 @@ const Card = ({ pokemon }) => {
         <button onClick={handleDelete}>Eliminar</button>
       )}
 
+        <Link to={'/home'}>
+         <button onClick={handleClearName}> Back </button>
+         </Link>
 
       </Link>
     </div>

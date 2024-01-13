@@ -13,6 +13,7 @@ import { FETCH_POKEMONS_SUCCESS,
   RESET_FILTERED_POKEMONS,
   SORT_POKEMONS,
   SEARCH_POKEMON,
+  RESET_NAME,
  } from "./action-types";
 
 
@@ -151,6 +152,11 @@ case DELETE_POKEMON_FAILURE:
       sorted:[],
     };
 
+    case RESET_NAME:
+      return {
+        ...state,
+        searchResults: [],
+      };
 
 
   //* Ordenamiento
@@ -180,5 +186,6 @@ case DELETE_POKEMON_FAILURE:
       return state;
   }
 };
+
 
 export default reducer;

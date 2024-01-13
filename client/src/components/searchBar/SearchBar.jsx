@@ -20,6 +20,7 @@ const handleSearch = () => {
    dispatch(searchPokemonByName(inputValue));
  };
 
+
    return (
       <div className={styles.container}>
 
