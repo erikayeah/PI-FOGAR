@@ -14,6 +14,7 @@ import {
   FILTER_BY_TYPE,
   RESET_FILTERED_POKEMONS,
   SORT_POKEMONS,
+  SEARCH_POKEMON,
 } from "./action-types";
 
 const URL = 'http://localhost:3001/pokemon'   
@@ -23,6 +24,21 @@ export const setSelectedPokemon = (pokemon) => ({
    type: SET_SELECTED_POKEMON,
    payload: pokemon,
  });
+
+ //* Get by name
+
+ export const searchPokemonByName = (name) => async (dispatch) => {
+
+  try {
+    const response = await axios.get(`${URL}/name?name=${name}`);
+    const data = response.data
+
+    dispatch({ type: SEARCH_POKEMON, payload: data });
+    
+  } catch (error) {
+    dispatch({ type: SEARCH_POKEMON, payload: { error: error.message } });
+  }
+};
 
 
 //* Get pokemons to Home

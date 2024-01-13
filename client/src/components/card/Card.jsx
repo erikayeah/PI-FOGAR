@@ -16,6 +16,9 @@ const Card = ({ pokemon }) => {
 
   const firstType = types && types.length > 0 ? types[0] : null;
 
+
+  let joinTypes = types.join(', ')
+
   const handleSeeMoreClick = async () => {
    dispatch(setSelectedPokemon(pokemon));
  };
@@ -37,7 +40,7 @@ const Card = ({ pokemon }) => {
     <div className={`${styles.container} ${styles[firstType]}`}>
       <h2 className={styles.h2}> {name} </h2>
       <img className={styles.image} src={image} alt={name} />
-      <p>Type: {types.join(', ')}</p>
+      <p>Type: {joinTypes}</p>
       <Link to={`/pokemon/${id}`}>
         <button className={styles.seeMoreButton} onClick={handleSeeMoreClick}> See more </button>
 

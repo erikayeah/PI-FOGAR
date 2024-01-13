@@ -12,6 +12,7 @@ import { FETCH_POKEMONS_SUCCESS,
   FILTER_BY_TYPE,
   RESET_FILTERED_POKEMONS,
   SORT_POKEMONS,
+  SEARCH_POKEMON,
  } from "./action-types";
 
 
@@ -23,7 +24,8 @@ import { FETCH_POKEMONS_SUCCESS,
   filteredPokemons: [],
   isFiltered: false,
   sorted:[],
-  reset: false
+  searchResults: [],
+
 };
 
 
@@ -52,6 +54,12 @@ const reducer = (state = initialState, action) => {
         selectedPokemon: action.payload,
       };
 
+ //* Get by name
+      case SEARCH_POKEMON:
+      return {
+        ...state,
+        searchResults: action.payload
+      };
 
 //* Post
       case CREATE_POKEMON_SUCCESS:
