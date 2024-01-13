@@ -1,7 +1,7 @@
 import styles from "../searchBar/SearchBar.module.css"; 
 import {useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import {searchPokemonByName} from '../../redux/actions'
+import {searchPokemonByName, resetName } from '../../redux/actions'
 
 
 const SearchBar = () => {
@@ -20,6 +20,9 @@ const handleSearch = () => {
    dispatch(searchPokemonByName(inputValue));
  };
 
+ const clearSearch = () => {
+   dispatch(resetName ());
+ }
 
    return (
       <div className={styles.container}>
@@ -32,6 +35,8 @@ const handleSearch = () => {
       
 
       <button onClick={handleSearch} > Search Pokemon </button>
+
+      <button onClick={clearSearch }> Clear search </button>
 
       </div>
    )

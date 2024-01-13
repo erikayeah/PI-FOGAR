@@ -9,11 +9,9 @@ import FormPage from "../src/views/formPage/FormPage";
 
 
 //dependences
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchTypes } from '../src/redux/actions';
+;
+import { Routes, Route } from "react-router-dom";
+
 
 const App = () => {
 

@@ -1,15 +1,13 @@
 import styles from "./Card.module.css";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { setSelectedPokemon} from "../../redux/actions";
 import { deletePokemon, resetName } from '../../redux/actions';
 
 const Card = ({ pokemon }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();  // Cambiar a useNavigate
-  
-console.log('pokemon en card', pokemon);
 
   const { id, name, types, image, life, attack, defense, speed, height, weight,
   } = pokemon;
@@ -44,7 +42,6 @@ const handleClearName = () => {
 }
 
 
-   
    return (
     <div className={`${styles.container} ${styles[firstType]}`}>
       <h2 className={styles.h2}> {name} </h2>
@@ -57,9 +54,7 @@ const handleClearName = () => {
         <button onClick={handleDelete}>Eliminar</button>
       )}
 
-        <Link to={'/home'}>
-         <button onClick={handleClearName}> Back </button>
-         </Link>
+
 
       </Link>
     </div>
