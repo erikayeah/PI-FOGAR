@@ -37,9 +37,6 @@ const firstType = normalizedTypes.length > 0 ? normalizedTypes[0].name : null;
   }
 };
 
-const handleClearName = () => {
-  dispatch(resetName());
-}
 
 
    return (

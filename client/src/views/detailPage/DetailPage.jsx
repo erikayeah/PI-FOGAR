@@ -11,6 +11,14 @@ const DetailPage = () => {
    return <p> Ups! try again </p>;
  }
   console.log('en detail', selectedPokemon);
+
+  // Normalización de la propiedad types
+const normalizedTypes = selectedPokemon.types.map((type) =>
+typeof type === "string" ? { name: type } : type
+);
+
+const typeNames = normalizedTypes.map((type) => type.name).join(", ");
+
   return (
     <div>
       <img src={selectedPokemon.image} alt="" />
@@ -23,7 +31,7 @@ const DetailPage = () => {
         <h3> Speed: {selectedPokemon.speed}</h3>
         <h3> Height: {selectedPokemon.height}</h3>
         <h3> Weight: {selectedPokemon.weight}</h3>
-        <h3> Types: {selectedPokemon.types.join(", ")} </h3>
+        <h3> Types: {typeNames} </h3>
       </div>
 
       <Link to={'/home'}>
