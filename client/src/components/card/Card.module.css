@@ -80,6 +80,10 @@
     background-color: #ee99ac; /* Color para el tipo fairy */
   }
 
+  .container.unknown {
+    background-color: #8874b0; /* Color para el tipo fairy */
+  }
+
    .image {
       width: 50%;
       height: 40%; /* Asegura que la altura se ajuste al contenedor */
@@ -102,3 +106,21 @@
      padding: 5px;
      margin: 5px;
      }
+
+     .button {
+      font-size: 17px;
+      font-weight: bold;
+      border: 1px solid #000000; /* Borde negro */
+      color: #000000;
+      padding: 5px;
+      background: #ffffff; /* Fondo gris claro */
+      border-radius: 5px;
+      margin: 3px;
+      font-family: 'VT323', monospace;
+      font-size: 20;
+      text-transform: uppercase;
+      cursor: pointer;
+      
+     }
+
+     

@@ -1,0 +1,37 @@
+
+.container {
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center; /* Centra los elementos horizontalmente */
+   margin-top: 40px;
+   padding: 5px;
+   width: 100%;
+   color: #000;
+   font-size: 25;
+ }
+
+ .button {
+  font-size: 17px;
+  font-weight: bold;
+  border: 1px solid #000000; /* Borde negro */
+  color: #000000;
+  padding: 5px;
+  background: #ffffff; /* Fondo gris claro */
+  border-radius: 5px;
+  margin: 3px;
+  font-family: 'VT323', monospace;
+  font-size: 20;
+  text-transform: uppercase;
+  cursor: pointer;
+  align-items: center;
+  align-content: center;
+  
+ }
+
+
+
+ .span{
+   margin: 8px;
+   font-size: 25;
+ }

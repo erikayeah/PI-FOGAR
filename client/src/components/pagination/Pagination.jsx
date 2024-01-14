@@ -1,5 +1,6 @@
 // Pagination.js
 import React from 'react';
+import styles from './Pagination.module.css';
 
 const Pagination = ({ currentPage, cardsPerPage, totalCards, onPageChange }) => {
   const totalPages = Math.ceil(totalCards / cardsPerPage);
@@ -12,21 +13,33 @@ const Pagination = ({ currentPage, cardsPerPage, totalCards, onPageChange }) => 
 
  
   return (
-    <div >
-      <button onClick={() => handlePageClick(1) }  > ⇤ </button>
-      <button 
-         onClick={() => handlePageClick(currentPage -1)}
-         disabled = { currentPage === 1}
-          > ⬅️ </button>
+    <div className={styles.container}>
 
-          <span> {currentPage} OF {totalPages} </span>
+      <button className={styles.button} onClick={() => handlePageClick(1) }>
+         ⏮ First 
+      </button>
 
-          <button 
-         onClick={() => handlePageClick(currentPage +1)}
-         disabled = { currentPage === totalPages}
-          > ➡️ </button>
-          <button onClick={() => handlePageClick(totalPages) }  > ⇥ </button>
 
+<button className={styles.button} onClick={() => handlePageClick(currentPage -1)}
+         disabled = { currentPage === 1}>
+        ◀️ Back
+      </button>
+
+
+
+          <span className={styles.span}> {currentPage} OF {totalPages} </span>
+
+
+<button className={styles.button} onClick={() => handlePageClick(currentPage +1)}
+         disabled = { currentPage === totalPages}>
+        Next ▶️
+      </button>
+
+
+
+          <button className={styles.button} onClick={() => handlePageClick(totalPages) } >
+         Last ⏭ 
+      </button>
     </div>
   );
 };

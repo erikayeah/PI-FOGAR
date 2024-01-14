@@ -1,10 +1,9 @@
 import SearchBar from "../searchBar/SearchBar"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import styles from "../navBar/NavBar.module.css";
 import {filterByOrigin, filterByType, sortPokemons, resetFilteredPokemons, fetchPokemons, searchPokemonByName} from '../../redux/actions';
-
+import { Link } from "react-router-dom";
 
 
 const NavBar = () => {
@@ -51,32 +50,36 @@ const handleTypeFilter = (event) => {
 
       <div className = {styles.searchBar}>
 
-      <Link to={'/home'}>
-         <button onClick={handleClearFilter }> Home </button>
-         </Link>
+      {/* <Link to={'/home'}>
+         <button className={styles.button} onClick={handleClearFilter }> Home </button>
+         </Link> */}
 
          <SearchBar />
-
          <Link to={'/post'}>
-         <button> Create Pokemon </button>
+         <button className={styles.button} > 
+         <span className={styles.button_top}> Create pokemon </span>
+         </button>
          </Link>
+
+
 
       </div>
 
-      <div className = {styles.containerFilter}>
+      <div className={styles.divFilter}>
 
+        <div className = {styles.containerFilter} >
 
-
-
-        <h3>Filter by origin</h3>
-        <select onChange={handleOriginFilter}>
+        <h3 className={styles.h3} >Filter by origin</h3>
+        <select className={styles.select} onChange={handleOriginFilter}>
           <option value="ALL">ALL</option>
           <option value="API">API</option>
           <option value="DDBB">Database</option>
         </select>
+        </div>
 
-        <h3>Filter by type</h3>
-        <select onChange={handleTypeFilter}>
+<div className = {styles.containerFilter}>
+        <h3 className={styles.h3}>Filter by type</h3>
+        <select className={styles.select} onChange={handleTypeFilter}>
           <option value="ALL">ALL</option>
           {types.map((type) => (
             <option key={type.id} value={type.name}>
@@ -84,23 +87,32 @@ const handleTypeFilter = (event) => {
             </option>
           ))}
         </select>
+          </div>
 
-     
-        <h3>Ordenar</h3>
-        <select onChange={handleSortChange}>
+     <div className = {styles.containerFilter}>
+
+        <h3 className={styles.h3} >Order</h3>
+        <select className={styles.select} onChange={handleSortChange}>
   <option value="">Seleccionar</option>
-  <option value='{"sortBy": "id", "sortOrder": "asc"}'>Ascendente por ID</option>
-  <option value='{"sortBy": "id", "sortOrder": "desc"}'>Descendente por ID</option>
-  <option value='{"sortBy": "attack", "sortOrder": "asc"}'>Ascendente por Attack</option>
-  <option value='{"sortBy": "attack", "sortOrder": "desc"}'>Descendente por Attack</option>
+  <option value='{"sortBy": "id", "sortOrder": "asc"}'>Ascendant by ID</option>
+  <option value='{"sortBy": "id", "sortOrder": "desc"}'>Descendant by ID</option>
+  <option value='{"sortBy": "attack", "sortOrder": "asc"}'>Ascendant by Attack</option>
+  <option value='{"sortBy": "attack", "sortOrder": "desc"}'>Descendantby Attack</option>
 </select>
+
+
+     </div>
+     <div className={styles.containerReset}>
+
+     {/* <h2  className={styles.h2}> Clear filters </h2> */}
+    <button className={styles.button} onClick = {handleClearFilter} >
+      <span className={styles.button_top}>reset filter</span>
+    </button>
+
+     </div>
 
       </div>
 
-<div className = {styles.containerReset} >
-   <h2> Please, clear filters before a new selection </h2>
-    <button onClick = {handleClearFilter} >Reset Filters</button>
-</div>
 
       </div>
    )

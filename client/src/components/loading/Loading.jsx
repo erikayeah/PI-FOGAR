@@ -5,7 +5,7 @@ import loaderGif from '../../assets/images/loading.gif';
 const Loading = () => {
   return (
     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-      <h2> Loading </h2>
+      <h2 style={{color: 'black'}}> Loading </h2>
       <img className={styles.image} src={loaderGif} alt="Loading..." />
     </div>
   );

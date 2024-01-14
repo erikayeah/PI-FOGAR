@@ -1,7 +1,7 @@
 // DetailPage.js
 import React from "react";
 import { useSelector } from "react-redux";
-import loadingGif from "../../assets/images/loading.gif";
+import styles from "./DetailPage.module.css";
 import { Link } from "react-router-dom";
 
 const DetailPage = () => {
@@ -35,7 +35,9 @@ const typeNames = normalizedTypes.map((type) => type.name).join(", ");
       </div>
 
       <Link to={'/home'}>
-         <button> Back </button>
+         <button className={styles.button}> 
+          <span className={styles.button_top}> Back </span>
+         </button>
          </Link>
 
     </div>

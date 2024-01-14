@@ -237,11 +237,13 @@ const FormPage = () => {
 
 
 <button type="submit" className={styles.button} disabled={Object.values(errors).some((error) => error && error.length > 0)}>
-          Create pokemon
+          <span className={styles.button_top}> Create pokemon </span>
         </button>
 
          <Link to="/home">
-        <button> Back to Home </button>
+        <button className={styles.button}> 
+        <span className={styles.button_top}> Back to home</span> 
+        </button>
          </Link>
 
       </form>

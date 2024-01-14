@@ -38,7 +38,8 @@ export const setSelectedPokemon = (pokemon) => ({
     dispatch({ type: SEARCH_POKEMON, payload: data });
     
   } catch (error) {
-    dispatch({ type: SEARCH_POKEMON, payload: { error: error.message } });
+    alert('Ops, something go wrong', error.message)
+    dispatch({ type: SEARCH_POKEMON, payload: [] });
   }
 };
 

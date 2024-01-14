@@ -45,10 +45,12 @@ const firstType = normalizedTypes.length > 0 ? normalizedTypes[0].name : null;
       <img className={styles.image} src={image} alt={name} />
       <p>Type: {typeNames}</p>
       <Link to={`/pokemon/${id}`}>
-        <button className={styles.seeMoreButton} onClick={handleSeeMoreClick}> See more </button>
+
+        <button className={styles.button} onClick={handleSeeMoreClick}> See more </button>
+
 
         {isNaN(pokemon.id) && (
-        <button onClick={handleDelete}>Eliminar</button>
+        <button className={styles.button} onClick={handleDelete}>Eliminar</button>
       )}
 
 

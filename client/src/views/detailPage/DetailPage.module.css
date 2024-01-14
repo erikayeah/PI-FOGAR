@@ -1,3 +1,40 @@
 .container {
    background-color: plum;
 }
+
+.button {
+   font-size: 17px;
+   font-weight: bold;
+   border: 1px solid #000000; /* Borde negro */
+   border-radius: 0.70em;
+   padding: 1px;
+   background: #000000; /* Fondo gris claro */
+   margin: 3px;
+   font-family: 'VT323', monospace;
+   font-size: 20;
+   text-transform: uppercase;
+   cursor: pointer;
+ }
+ 
+ .button_top {
+   display: block;
+   box-sizing: border-box;
+   border: 2px solid #000; /* Borde negro */
+   border-radius: 0.60em;
+   background: #e8e8e8; /* Fondo gris claro */
+   color: #000; /* Texto negro */
+   transform: translateY(-0.05em);
+   padding: 6px;
+   transition: transform 0.1s ease;
+   font-family: 'VT323', monospace;
+   font-size: 20;
+   text-transform: uppercase;
+ }
+ 
+ .button:hover .button_top {
+   transform: translateY(-0.33em);
+ }
+ 
+ .button:active .button_top {
+   transform: translateY(0);
+ }

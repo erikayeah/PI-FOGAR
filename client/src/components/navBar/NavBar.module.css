@@ -1,28 +1,88 @@
 .container {
-   background-color: blueviolet;
-   align-items: center;
-   align-content: center;
-   padding: 5px;
+  /* background-color: #8f8f8f; Color de fondo similar al Gameboy */
+  border-bottom: 2px solid #000; /* Borde inferior que simula el estilo de los juegos de Gameboy */
+  color: #fff; /* Color del texto */
+  padding: 10px; /* Espaciado interno */
    }
 
-   .containerFilter {
-      background-color: rgb(182, 142, 219);
-      display: flex;
-      justify-content: space-evenly; /* Ajusta esta línea */
-      padding: 5px;
-    }
 
-    .containerReset {
-      background-color: rgb(145, 127, 161);
-      display:flex;
-      justify-content: space-evenly; /* Ajusta esta línea */
-      font-size: 18 px;
-      padding: 5px;
-    }
+/* Tu archivo de estilos o módulo CSS */
+.divFilter {
+  display: flex;
+  justify-content: space-evenly;
+  /* background-color: darkgreen; */
+  margin-top: 30px;
+}
 
+.containerFilter {
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Ajusta según tu preferencia para agregar espacio entre los grupos de filtro */
+  color: #000;
+  font-size: 16px;
+}
 
+.h3{
+  white-space: nowrap;
+  font-size: 23px;
+  margin: 5px;
+}
+
+  .select {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    font-family: 'VT323', monospace;
+    font-size: 18px; /* Ajusta el tamaño de fuente según tus necesidades */
+    background-color: #fff;
+    color: #333;
+    margin: 8px;
+  }
+  
+  /* Ajusta el tamaño de fuente para las opciones del select */
+  .select option {
+    font-size: 18px; /* Ajusta el tamaño de fuente según tus necesidades */
+  }
+  
     .searchBar{
-      background-color: rgb(59, 27, 89);
       display: flex;
       justify-content: space-evenly; /* Ajusta esta línea */
+    }
+
+
+    .button {
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: bold;
+      border: 1px solid #000000; /* Borde negro */
+      border-radius: 0.70em;
+      padding: 1px;
+      background: #000000; /* Fondo gris claro */
+      margin: 3px;
+      font-family: 'VT323', monospace;
+      font-size: 20;
+      text-transform: uppercase;
+    }
+    
+    .button_top {
+      display: block;
+      box-sizing: border-box;
+      border: 2px solid #000; /* Borde negro */
+      border-radius: 0.60em;
+      background: #e8e8e8; /* Fondo gris claro */
+      color: #000; /* Texto negro */
+      transform: translateY(-0.05em);
+      padding: 6px;
+      transition: transform 0.1s ease;
+      font-family: 'VT323', monospace;
+      font-size: 20;
+      text-transform: uppercase;
+    }
+    
+    .button:hover .button_top {
+      transform: translateY(-0.33em);
+    }
+    
+    .button:active .button_top {
+      transform: translateY(0);
     }

@@ -1,5 +1,5 @@
 //Style
-import style from "./LandingPage.module.css";
+import styles from "./LandingPage.module.css";
 
 //Hooks
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-   document.body.style.backgroundImage = `url('/src/assets/images/fondoLanding2.gif')`;
+   document.body.style.backgroundImage = `url('/src/assets/images/fondoFon.jpg')`;
    return () => {
      document.body.style.backgroundImage = null;
    };
@@ -21,10 +21,12 @@ const LandingPage = () => {
   };
 
   return (
-    <div className= {style.container}>
+    <div className= {styles.container}>
 
-        <h1> PokeAPI </h1>
-        <button onClick={handleHome}> Gotta catch 'em all! </button>
+        <img className={styles.image} src="/src/assets/images/logo.png" alt="" />
+        <button className={styles.btn} onClick={handleHome}>
+      <span className={styles.noselect}>Gotta catch 'em all!</span>
+    </button>
         
     </div>
   );
