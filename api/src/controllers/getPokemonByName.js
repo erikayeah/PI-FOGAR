@@ -7,9 +7,9 @@ const URL = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemonByName = async (name) => {
   
-  if (name.length === 0) {
-    throw Error("Error name not defined");
-  }
+  // if (name.length === 0) {
+  //   throw Error("Error name not defined");
+  // }
 
     const lowerCase = name.toLowerCase();
 

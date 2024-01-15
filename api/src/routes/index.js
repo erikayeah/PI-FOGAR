@@ -5,7 +5,10 @@ const getPokemonByNameHandler = require("../handlers/getPokemonByNameHandler");
 const getPokemonByIdHandler = require("../handlers/getPokemonByIdHandler");
 const getTypesHandler = require("../handlers/getTypesHandler");
 const postPokemonHandler = require("../handlers/postPokemonHandler");
+
+
 const deletePokemonHandler = require("../handlers/deletePokemonHandler");
+const putPokemonHandler = require("../handlers/putPokemonHandler");
 const { initializeTypes } = require("../db"); // Importa initializeTypes aquí
 
 
@@ -33,6 +36,7 @@ router.get("/name", getPokemonByNameHandler);
 router.get("/type", getTypesHandler);
 
 router.delete("/delete/:id", deletePokemonHandler);
+router.put("/put/:id", putPokemonHandler);
 
 router.get("/:id", getPokemonByIdHandler); //* ID al final, si no las otras rutas no funcionan
 
