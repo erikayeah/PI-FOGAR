@@ -1,18 +1,16 @@
-import styles from "./FormPage.module.css";
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPokemon, fetchTypes } from '../../redux/actions/';
+import { putPokemon } from '../../redux/actions'; // Asegúrate de importar la acción necesaria
 import validation from '../../utils/validation';
-import { Link } from 'react-router-dom';
-
-const FormPage = () => {
-  
-      
-   const dispatch = useDispatch();
-   const types = useSelector(state => state.types); // Ya agregados al renderizar HomePage.
+import styles from './PutForm.module.css'; // Asegúrate de tener los estilos adecuados
+import validations from '../../utils/validation';
 
 
-   const [formData, setFormData] = useState({
+const PureForm = ({ selectedPokemon, onClose }) => {
+  const dispatch = useDispatch();
+  const types = useSelector((state) => state.types);
+
+  const [formData, setFormData] = useState({
    name: "",
     image: "",
     life: "",
@@ -35,7 +33,6 @@ const FormPage = () => {
       weight: "",
     });
 
-
     const handleChange = (e) => {
       const { name, value } = e.target;
       if (name === "type1" || name === "type2") {
@@ -46,7 +43,7 @@ const FormPage = () => {
       }
       validateInput(name, value);
     };
-  
+
     const validateInput = (name, value) => {
       const newErrors = { ...errors };
   
@@ -67,36 +64,25 @@ const FormPage = () => {
   
       setErrors(newErrors);
     };
-  
-    
-    const handleSubmit = async (e) => {
-      e.preventDefault();
 
-      const formErrors = validation(formData);
-      setErrors(formErrors);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (Object.values(formErrors).some((error) => error !== "")) {
-   // Hay errores en el formulario, puedes mostrarlos o hacer algo más si es necesario
-   window.alert('There are errors in the form. Please fix them before submitting.');
-   return;
- }
+    const formErrors = validation(formData);
+    setErrors(formErrors);
 
- dispatch(createPokemon(formData));
+    if (Object.values(formErrors).some((error) => error !== '')) {
+      // Hay errores en el formulario, puedes mostrarlos o hacer algo más si es necesario
+      window.alert('There are errors in the form. Please fix them before submitting.');
+      return;
+    }
 
- setFormData({
-  name: "",
-  image: "",
-  life: "",
-  attack: "",
-  defense: "",
-  speed: "",
-  height: "",
-  weight: "",
-  types: []
-});
+    // Aquí envías la solicitud de actualización al servidor
+    dispatch(putPokemon(selectedPokemon.id, formData));
 
- window.alert('Pokemon created successfully!'); //Error, sale siempre, salga bien o salga mal ...
-};
+    // Cerrar el formulario o realizar alguna otra acción después de la actualización
+    onClose();
+  };
 
   return (
     <div className={styles.container}>
@@ -112,7 +98,7 @@ const FormPage = () => {
             onChange={handleChange}
             required
           />
-          <span className={styles.error} > {errors.name && errors.name} </span>
+          <span className={styles.error}>{errors.name && errors.name}</span>
         </div>
 
         <div className={styles.formGroup}>
@@ -126,7 +112,7 @@ const FormPage = () => {
             onChange={handleChange}
             required
           />
-          <span className={styles.error} >{errors.image && errors.image}</span>
+          <span className={styles.error}>{errors.image && errors.image}</span>
         </div>
 
         <div className={styles.formGroup}>
@@ -210,42 +196,56 @@ const FormPage = () => {
           <span className={styles.error}>{errors.weight && errors.weight}</span>
         </div>
 
-   <span> Choose up to 2 types </span>
-   <br />
+
+        <span> Choose up to 2 types </span>
+        <br />
         <select name="type1" value={formData.type1} onChange={handleChange} required>
-  <option value="" disabled>Select first type</option>
-  {types.map((type) => (
-    <option key={type.id} value={type.name} disabled={formData.types.includes(type.name) || formData.types.length >= 2}>
-      {type.name}
-    </option>
-  ))}
-</select>
+          <option value="" disabled>
+            Select first type
+          </option>
+          {types.map((type) => (
+            <option
+              key={type.id}
+              value={type.name}
+              disabled={formData.types.includes(type.name) || formData.types.length >= 2}
+            >
+              {type.name}
+            </option>
+          ))}
+        </select>
 
-<select name="type2" value={formData.type2} onChange={handleChange} disabled={formData.type1 === ""}>
-  <option value="" disabled>Select second type</option>
-  <option value="" disabled={formData.type1 === ""}> None </option>
-  {types.map((type) => (
-    <option key={type.id} value={type.name} disabled={formData.types.includes(type.name) || formData.types.length >= 2}>
-      {type.name}
-    </option>
-  ))}
-</select>
+        <select name="type2" value={formData.type2} onChange={handleChange} disabled={formData.type1 === ""}>
+          <option value="" disabled>
+            Select second type
+          </option>
+          <option value="" disabled={formData.type1 === ""}>
+            None
+          </option>
+          {types.map((type) => (
+            <option
+              key={type.id}
+              value={type.name}
+              disabled={formData.types.includes(type.name) || formData.types.length >= 2}
+            >
+              {type.name}
+            </option>
+          ))}
+        </select>
 
-
-
-<button type="submit" className={styles.button} disabled={Object.values(errors).some((error) => error && error.length > 0)}>
-          <span className={styles.button_top}> Create pokemon </span>
+        <button
+          type="submit"
+          className={styles.button}
+          disabled={Object.values(errors).some((error) => error && error.length > 0)}
+        >
+          <span className={styles.button_top} onClick={handleSubmit}> Update Pokemon </span>
         </button>
 
-         <Link to="/home">
-        <button className={styles.button}> 
-        <span className={styles.button_top}> Back to home</span> 
+        <button type="button" className={styles.button} onClick={onClose}>
+          <span className={styles.button_top}> Cancel </span>
         </button>
-         </Link>
-
       </form>
     </div>
   );
 };
 
-export default FormPage;
+export default PureForm;

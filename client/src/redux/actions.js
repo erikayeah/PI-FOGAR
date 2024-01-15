@@ -16,9 +16,27 @@ import {
   SORT_POKEMONS,
   SEARCH_POKEMON,
   RESET_NAME,
+  PUT_POKEMON
 } from "./action-types";
 
 const URL = 'http://localhost:3001/pokemon'   
+
+//*Put pokemon
+
+export const putPokemon = (pokemonId, updatedData) => async (dispatch) => {
+
+  // console.log('llega de id', pokemonId);
+  // console.log('llega de info body', updatedData);
+  //* LLega bien
+
+
+  try {
+    const response = await axios.put(`${URL}/put/${pokemonId}`, updatedData);
+    dispatch({ type: PUT_POKEMON, payload: response.data });
+  } catch (error) {
+    dispatch({ type: PUT_POKEMON, payload: error, error: true });
+  }
+};
 
 //* Get detail by ID
 export const setSelectedPokemon = (pokemon) => ({
@@ -33,12 +51,11 @@ export const setSelectedPokemon = (pokemon) => ({
   try {
     const response = await axios.get(`${URL}/name?name=${name}`);
     const data = response.data
-    console.log('data de actionr', data);
 
     dispatch({ type: SEARCH_POKEMON, payload: data });
     
   } catch (error) {
-    alert('Ops, something go wrong', error.message)
+    alert(`There is no pokemon with the name ${name}`)
     dispatch({ type: SEARCH_POKEMON, payload: [] });
   }
 };
@@ -68,7 +85,7 @@ export const fetchPokemons = () => {
 };
 
 
-//* Creacion pokemon
+//* Create pokemon
 
 export const createPokemon = (pokemonData) => async (dispatch) => {
   try {
@@ -82,7 +99,7 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
   }
 };
 
-//* Obtener types
+//* Get types
 export const fetchTypes = () => async (dispatch) => {
   try {
     const response = await axios.get(`${URL}/type`); // Reemplaza '/api/types' con la ruta correcta de tu API para obtener los types.
@@ -148,7 +165,7 @@ export const filterByType = (pokemonType) => {
     type: RESET_FILTERED_POKEMONS,
   });
 
-  //* Reset NAme
+  //* Reset Name
   export const resetName = () => ({
     type: RESET_NAME,
   });

@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../../components/navBar/NavBar";
 import Cards from "../../components/cards/Cards";
 import Pagination from "../../components/pagination/Pagination";
+// import Prueba from "../../components/PRUEBA/Prueba";
 import Loading from "../../components/loading/Loading";
 import { fetchPokemons, fetchTypes, filterByOrigin, sortPokemons } from "../../redux/actions";
+
 
 
 
@@ -14,9 +16,6 @@ const HomePage = () => {
   const filteredPokemons = useSelector((state) => state.filteredPokemons); // El resultado de los filtros
   const sorted = useSelector((state) => state.sorted); 
   const searchResults = useSelector((state) => state.searchResults); //El resultado de buscar por nombre
-
-  console.log('resultados en home', searchResults);
-
 
   //* Loading
   const [loading, setLoading] = useState(true); // Para loading
@@ -30,7 +29,7 @@ const HomePage = () => {
           // Fetch pokemons
           await dispatch(fetchPokemons());
         } catch (error) {
-          window.alert("Error al obtener los datos", error);
+          window.alert("Error: ", error);
           // Manejar el error si es necesario
         } finally {
           setLoading(false);
@@ -72,7 +71,6 @@ const HomePage = () => {
     pokemonList = allPokemons.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
   }
 
-console.log('como queda pokemonlist' ,pokemonList); // [ {id, name, image, etc} ] 
 
   return (
     <div>
@@ -81,6 +79,7 @@ console.log('como queda pokemonlist' ,pokemonList); // [ {id, name, image, etc} 
       ) : (
         <>
           <NavBar />
+          {/* <Prueba/> */}
           <Pagination
             currentPage={currentPage}
             cardsPerPage={cardsPerPage}

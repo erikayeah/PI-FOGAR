@@ -14,6 +14,7 @@ import { FETCH_POKEMONS_SUCCESS,
   SORT_POKEMONS,
   SEARCH_POKEMON,
   RESET_NAME,
+  PUT_POKEMON
  } from "./action-types";
 
 
@@ -26,7 +27,8 @@ import { FETCH_POKEMONS_SUCCESS,
   isFiltered: false,
   sorted:[],
   searchResults: [],
-
+//!
+updatePokemonResult: null,
 };
 
 
@@ -34,6 +36,15 @@ import { FETCH_POKEMONS_SUCCESS,
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
+
+    //!
+
+    case PUT_POKEMON:
+      return {
+        ...state,
+        updatePokemonResult: action.payload,
+      };
+      //!
 
     case FETCH_POKEMONS_SUCCESS:
       return {
@@ -49,6 +60,8 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
       };
 
+
+      //* Get by ID
     case SET_SELECTED_POKEMON:
       return {
         ...state,
@@ -162,16 +175,16 @@ case DELETE_POKEMON_FAILURE:
   //* Ordenamiento
 
   case SORT_POKEMONS:
-  const { sortBy, sortOrder } = action.payload;
-  let sortedPokemons = state.isFiltered ? [...state.filteredPokemons] : [...state.pokemons];
-
-  if (sortBy === "id") {
-    sortedPokemons.sort((a, b) => {
-      const idA = typeof a.id === 'string' ? a.id : String(a.id);
-      const idB = typeof b.id === 'string' ? b.id : String(b.id);
-
-      return sortOrder === "asc" ? idA.localeCompare(idB) : idB.localeCompare(idA);
-    });
+    const { sortBy, sortOrder } = action.payload;
+    let sortedPokemons = state.isFiltered ? [...state.filteredPokemons] : [...state.pokemons];
+  
+    if (sortBy === "id") {
+      sortedPokemons.sort((a, b) => {
+        const idA = typeof a.id === 'string' ? parseInt(a.id.match(/\d+/)[0]) : a.id;
+        const idB = typeof b.id === 'string' ? parseInt(b.id.match(/\d+/)[0]) : b.id;
+  
+        return sortOrder === "asc" ? idA - idB : idB - idA;
+      });
   } else if (sortBy === "attack") {
     sortedPokemons.sort((a, b) => (sortOrder === "asc" ? a.attack - b.attack : b.attack - a.attack));
   }

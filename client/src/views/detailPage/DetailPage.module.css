@@ -1,5 +1,31 @@
 .container {
-   background-color: plum;
+  background-color: transparent;
+  border: 2px solid #000000;
+  backdrop-filter: blur(20px); /* Ajusta el valor de blur según tus preferencias */
+  filter: blur(0);
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos a lo largo del eje principal (horizontal) */
+  align-items: center; /* Centra verticalmente los elementos en el contenedor */
+  padding: 10px; /* Añade espacio alrededor del contenido del contenedor */
+  width: 600px;
+  border-radius: 10px;
+}
+
+.image {
+  width: 200px; /* Ajusta el valor según tus necesidades */
+  margin: 10px auto; /* Combina las propiedades margin en una sola línea para centrar la imagen y agregar espacio */
+  position: relative;
+  object-fit: cover; /* Ajusta la forma en que la imagen se ajusta al contenedor */
+  padding: 15px;
+}
+
+.details {
+  width: 55%;
+  margin-top: 10px;
+  text-align: left;
+  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+  line-height: 0.7; /* Ajusta la distancia entre líneas (ajusta según tus preferencias) */
+  color: #000;
 }
 
 .button {
