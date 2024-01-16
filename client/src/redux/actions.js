@@ -88,9 +88,9 @@ export const fetchPokemons = () => {
 //* Create pokemon
 
 export const createPokemon = (pokemonData) => async (dispatch) => {
-  console.log('data pokemon action', pokemonData); //!NO entra .. no llega data ..
+  console.log('data pokemon action', pokemonData); 
   try {
-    const response = await axios.post(`${URL}/post`, pokemonData); \
+    const response = await axios.post(`${URL}/post`, pokemonData); 
     // Despacha alguna acción para manejar el resultado (puedes actualizar el estado de los Pokémon)
     dispatch({ type: CREATE_POKEMON_SUCCESS, payload: response.data });
   } catch (error) {
