@@ -19,7 +19,6 @@ const DetailPage = () => {
 
 useEffect(() => {
   // Aquí puedes realizar alguna acción después de que se actualiza el Pokémon
-  console.log("Pokémon actualizado:", selectedPokemon);
 
   // Puedes agregar más lógica según sea necesario
 }, [selectedPokemon]);
@@ -33,7 +32,7 @@ const normalizedTypes = selectedPokemon.types.map((type) =>
 typeof type === "string" ? { name: type } : type
 );
 
-const typeNames = normalizedTypes.map((type) => type.name).join(", ");
+const typeNames = normalizedTypes.map((type) => type.name).join(" && ");
 
 //!
 

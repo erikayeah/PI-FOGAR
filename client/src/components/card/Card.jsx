@@ -1,56 +1,54 @@
 import styles from "./Card.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch} from "react-redux";
-import { setSelectedPokemon} from "../../redux/actions";
-import { deletePokemon } from '../../redux/actions';
+import { useDispatch , useSelector} from "react-redux";
+import { setSelectedPokemon } from "../../redux/actions";
+import { resetName} from "../../redux/actions"
+
 
 const Card = ({ pokemon }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch();   
+  const searchResults= useSelector(state => state.searchResults); // Ya agregados al renderizar HomePage.
 
-  const { id, name, types, image, life, attack, defense, speed, height, weight,
+  const {
+    id,
+    name,
+    types,
+    image,
+    life,
+    attack,
+    defense,
+    speed,
+    height,
+    weight,
   } = pokemon;
 
-// Normalización de la propiedad types
-const normalizedTypes = types.map((type) =>
-typeof type === "string" ? { name: type } : type
-);
+  // Normalización de la propiedad types
+  const normalizedTypes = types.map((type) =>
+    typeof type === "string" ? { name: type } : type
+  );
 
-const firstType = normalizedTypes.length > 0 ? normalizedTypes[0].name : null;
+  const firstType = normalizedTypes.length > 0 ? normalizedTypes[0].name : null;
   const typeNames = normalizedTypes.map((type) => type.name).join(" && ");
 
   const handleSeeMoreClick = async () => {
-   dispatch(setSelectedPokemon(pokemon));
- };
-
-//  const handleDelete = () => {
-//   // Muestra una alerta de confirmación
-//   const isConfirmed = window.confirm("You are going to eliminate this pokemon ¿Are you sure?");
-//   // Si el usuario hace clic en "Aceptar", procede con la eliminación
-//   if (isConfirmed) {
-//     try {
-
-//       dispatch(deletePokemon(pokemon.id));
-//       navigate('/home');
-//       window.location.reload();
-      
-//     } catch (error) {
-//       console.error('Error al eliminar el Pokémon', error);
-//       // Lógica de manejo de errores si es necesario
-//     }
-//   }
-// };
+    dispatch(setSelectedPokemon(pokemon));
 
 
+    
+  };
+  const handleBack = () => {
+    dispatch(resetName ());
+  }
 
-   return (
-<div className={`${styles.container} ${styles[firstType]}`} style={{ border: '1px solid #000000' }}>
+  return (
+    <div
+      className={`${styles.container} ${styles[firstType]}`}
+      style={{ border: "1px solid #000000" }}
+    >
+      <h2 className={styles.h2}> {name} </h2>
+      <img className={styles.image} src={image} alt={name} />
 
-        <h2 className={styles.h2}> {name} </h2>
-        <img className={styles.image} src={image} alt={name} />
-
-        <div  className={styles.detail}>
-
+      <div className={styles.detail}>
         <p> {typeNames}</p>
         <Link to={`/pokemon/${id}`}>
           <button className={styles.button} onClick={handleSeeMoreClick}>
@@ -58,16 +56,23 @@ const firstType = normalizedTypes.length > 0 ? normalizedTypes[0].name : null;
           </button>
         </Link>
 
-        {/* {isNaN(pokemon.id) && (
-          <button className={styles.button} onClick={handleDelete}>
-            Eliminar
-          </button>
-        )} */}
-        </div>
 
-  </div>
-);
-        
+
+        {Array.isArray(searchResults) && searchResults.length > 0 && (
+  <Link to={'/home'}>
+    <button className={styles.button} onClick={handleBack} > Back </button>
+  </Link>
+)}
+
+{!Array.isArray(searchResults) && searchResults.name && (
+  <Link to={'/home'}>
+    <button className={styles.button} onClick={handleBack }  > Back </button>
+  </Link>
+)}
+
+      </div>
+    </div>
+  );
 };
 
 export default Card;

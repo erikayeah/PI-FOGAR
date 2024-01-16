@@ -25,28 +25,32 @@ if (inputValue.trim() === '') {
    else if (inputValue.trim() !== '') {
      // Llama a la acción de búsqueda y pasa el valor del input
      dispatch(searchPokemonByName(inputValue));
+     setInputValue('');
+     dispatch(resetName ());
+     
    }
  };
 
- const clearSearch = () => {
-  setInputValue('');
-   dispatch(resetName ());
- }
+//  const clearSearch = () => {
+//     dispatch(resetName ());
+//     setInputValue('');
+//  }
 
    return (
       <div className={styles.container}>
 
-      <button className={styles.button} onClick={clearSearch}>
+      {/* <button className={styles.button} onClick={clearSearch}>
         <span className={styles.button_top}>Clear search</span>
-      </button>
+      </button> */}
       
       <button className={styles.button} onClick={handleSearch}>
         <span className={styles.button_top}>Search Pokemon</span>
       </button>
 
       <input className={styles.input} 
-       type="text"
+       type="search"
        placeholder="Name" 
+       value={inputValue}
        onChange={handleChange}
       />
 

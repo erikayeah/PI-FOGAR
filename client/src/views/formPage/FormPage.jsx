@@ -82,35 +82,44 @@ const FormPage = () => {
       setErrors(newErrors);
     };
   
+
     
     const handleSubmit = async (e) => {
       e.preventDefault();
+      
+      try {
+        const formErrors = validation(formData);
+        setErrors(formErrors);
+    
+        if (Object.values(formErrors).some((error) => error !== "")) {
+          window.alert('There are errors in the form. Please fix them before submitting.');
+          return;
+        }
+    
+        await dispatch(createPokemon(formData));
+        setFormData({
+          name: "",
+          image: "",
+          life: "",
+          attack: "",
+          defense: "",
+          speed: "",
+          height: "",
+          weight: "",
+          types: []
+        });
+        console.log('data dsd el form' , formData);
+        // Elimina este alert y maneja los mensajes de error en consecuencia
+        // window.alert('Pokemon created successfully!');
+        
+      } catch (error) {
+        // Muestra el mensaje de error del servidor en lugar de alert
+        window.alert(error.message);
+        // console.log('error en el FRONT', error); //! ESTE LOG NO LLEGA A VERSE EN CONSOLA
+      }
 
-      const formErrors = validation(formData);
-      setErrors(formErrors);
-
-  if (Object.values(formErrors).some((error) => error !== "")) {
-   // Hay errores en el formulario, puedes mostrarlos o hacer algo más si es necesario
-   window.alert('There are errors in the form. Please fix them before submitting.');
-   return;
- }
-
- dispatch(createPokemon(formData));
-
- setFormData({
-  name: "",
-  image: "",
-  life: "",
-  attack: "",
-  defense: "",
-  speed: "",
-  height: "",
-  weight: "",
-  types: []
-});
-
- window.alert('Pokemon created successfully!'); //Error, sale siempre, salga bien o salga mal ...
-};
+    };
+    
 
   return (
     <div className={styles.container}>

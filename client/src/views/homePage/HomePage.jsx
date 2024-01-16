@@ -19,6 +19,7 @@ const HomePage = () => {
 
   //* Loading
   const [loading, setLoading] = useState(true); // Para loading
+  
 
 
     useEffect(() => {
@@ -71,6 +72,7 @@ const HomePage = () => {
     pokemonList = allPokemons.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
   }
 
+//console.log('chequeo list pokemon', pokemonList);
   return (
     <div>
       {loading ? (

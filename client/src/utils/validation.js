@@ -16,6 +16,10 @@ const validations = (formData) => {
     errors.name = "Name must not be more than 15 characters";
   }
 
+  if (formData.name.length < 3) {
+    errors.name = "Name must be more than 2 characters";
+  }
+
   // Image
   if (!/(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(formData.image)) {
     errors.image = "URL must be valid";
