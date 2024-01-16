@@ -21,6 +21,7 @@ const getPokemonsHandler = async (req, res) => {
     types,
   };
 
+
   if (!name || !image || !life || !attack || !defense || !types) {
     console.log("Validation Error: Missing or invalid data");
     return res.status(400).send("Missing or invalid data");
@@ -38,7 +39,8 @@ const getPokemonsHandler = async (req, res) => {
       types: createdPokemon.types.map((type) => type.name)
     };
 
-    res.status(200).json(filteredType);
+    res.status(200).json({ filteredType, message: "Pokemon created successfully!" });
+
   } catch (error) {
     if (error.message === "Pokemon with this name already exists") {
       res.status(400).send(error.message);

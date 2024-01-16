@@ -20,6 +20,8 @@ const postPokemon = async ({ name, image, life, attack, defense, speed, height, 
       throw error;
     }
   }
+
+  console.log('como llega types', types);
     
   let typesInstances = [];
     
