@@ -16,7 +16,8 @@ import {
   SORT_POKEMONS,
   SEARCH_POKEMON,
   RESET_NAME,
-  PUT_POKEMON
+  PUT_POKEMON,
+  RESET_FILTER
 } from "./action-types";
 
 const URL = 'http://localhost:3001/pokemon'   
@@ -25,10 +26,9 @@ const URL = 'http://localhost:3001/pokemon'
 
 export const putPokemon = (pokemonId, updatedData) => async (dispatch) => {
 
-  // console.log('llega de id', pokemonId);
-  // console.log('llega de info body', updatedData);
+// console.log('llega de id', pokemonId);
+// console.log('llega de info body', updatedData);
   //* LLega bien
-
 
   try {
     const response = await axios.put(`${URL}/put/${pokemonId}`, updatedData);
@@ -165,10 +165,13 @@ export const filterByType = (pokemonType) => {
     type: RESET_FILTERED_POKEMONS,
   });
 
+
   //* Reset Name
   export const resetName = () => ({
     type: RESET_NAME,
   });
+
+
 
   //* Ordenamiento
   export const sortPokemons = (sortBy, sortOrder) => {

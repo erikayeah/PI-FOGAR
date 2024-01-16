@@ -5,15 +5,15 @@ import Cards from "../../components/cards/Cards";
 import Pagination from "../../components/pagination/Pagination";
 // import Prueba from "../../components/PRUEBA/Prueba";
 import Loading from "../../components/loading/Loading";
-import { fetchPokemons, fetchTypes, filterByOrigin, sortPokemons } from "../../redux/actions";
-
-
+import { fetchPokemons, fetchTypes } from "../../redux/actions";
 
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const allPokemons = useSelector((state) => state.pokemons || []); //Todos los pokemones 
   const filteredPokemons = useSelector((state) => state.filteredPokemons); // El resultado de los filtros
+  const isFilteredOrigin = useSelector((state) => state.isFilteredOrigin); // El resultado de los filtros
+  const isFilteredType = useSelector((state) => state.isFilteredType); // El resultado de los filtros
   const sorted = useSelector((state) => state.sorted); 
   const searchResults = useSelector((state) => state.searchResults); //El resultado de buscar por nombre
 
@@ -58,7 +58,7 @@ const HomePage = () => {
   } else if (typeof searchResults === 'object' && Object.keys(searchResults).length > 0) {
     // Si searchResults es un objeto, considéralo como un solo resultado
     pokemonList = [searchResults];
-  } else if (filteredPokemons.length > 0 || sorted.length > 0) {
+  } else if (isFilteredType || isFilteredOrigin || sorted.length > 0) {
     // Si hay resultados filtrados o ordenados, úsalos
     totalCards = filteredPokemons.length || sorted.length;
     pokemonList = (filteredPokemons.length > 0 ? filteredPokemons : sorted).slice(
@@ -70,7 +70,6 @@ const HomePage = () => {
     totalCards = allPokemons.length;
     pokemonList = allPokemons.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
   }
-
 
   return (
     <div>

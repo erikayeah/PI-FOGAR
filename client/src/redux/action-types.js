@@ -15,4 +15,5 @@ export const SORT_POKEMONS = "SORT_POKEMONS";
 export const SEARCH_POKEMON = "SEARCH_POKEMON";
 export const RESET_NAME = 'RESET_NAME';
 //!
+export const RESET_FILTER = 'RESET_FILTER'
 export const PUT_POKEMON = 'PUT_POKEMON';

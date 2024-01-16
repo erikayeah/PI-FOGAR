@@ -1,7 +1,7 @@
 .container {
-   width: 40%;
+   width: 80%;
    display: flex;
-   justify-content: space-evenly;
+   justify-content: left;
    align-items: center;
    align-content: center;
    }
@@ -13,7 +13,8 @@
     border-radius: 0.70em;
     padding: 1px;
     background: #000000; /* Fondo gris claro */
-   margin-left: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-family: 'VT323', monospace;
     font-size: 20;
     text-transform: uppercase;
@@ -57,7 +58,7 @@
   transition: all 0.5s;
   width: 20%;
   height: 29%;
-  margin-left: 1px;
+  margin-left: 10px;
   margin-right: 20px;
   font-family: 'VT323', monospace;
   color: #000;

@@ -14,7 +14,8 @@ import { FETCH_POKEMONS_SUCCESS,
   SORT_POKEMONS,
   SEARCH_POKEMON,
   RESET_NAME,
-  PUT_POKEMON
+  PUT_POKEMON,
+  RESET_FILTER
  } from "./action-types";
 
 
@@ -25,6 +26,8 @@ import { FETCH_POKEMONS_SUCCESS,
   error: null,
   filteredPokemons: [],
   isFiltered: false,
+  isFilteredOrigin: false,
+  isFilteredType: false,
   sorted:[],
   searchResults: [],
 //!
@@ -136,12 +139,45 @@ case DELETE_POKEMON_FAILURE:
   //* Filtered 
   
   case FILTER_BY_ORIGIN:
+  const filteredByOrigin = action.payload === "ALL"
+    ? state.pokemons
+    : state.pokemons.filter((pokemon) => (action.payload === "API" ? typeof pokemon.id === "number" : typeof pokemon.id === "string"));
+
+  return {
+    ...state,
+    isFiltered: state.isFilteredType || action.payload !== "ALL",
+    isFilteredOrigin: action.payload !== "ALL",
+    filteredPokemons: state.isFilteredType
+      ? state.filteredPokemons.filter((pokemon) => filteredByOrigin.includes(pokemon))
+      : filteredByOrigin.length > 0 ? filteredByOrigin : [],
+};
+
+case FILTER_BY_TYPE:
+  const filteredByType = action.payload === "ALL"
+    ? state.pokemons
+    : state.pokemons.filter((pokemon) => {
+        if (!pokemon.types) return false;
+        return pokemon.types.some(
+          (type) => (typeof type === "string" ? type === action.payload : type.name === action.payload)
+        );
+      });
+
+  return {
+    ...state,
+    isFiltered: state.isFilteredOrigin || action.payload !== "ALL",
+    isFilteredType: action.payload !== "ALL",
+    filteredPokemons: state.isFilteredOrigin
+      ? state.filteredPokemons.filter((pokemon) => filteredByType.includes(pokemon))
+      : filteredByType.length > 0 ? filteredByType : [],
+};
+
+/*
+  case FILTER_BY_ORIGIN:
     return {
       ...state,
       isFiltered: action.payload !== "ALL",
       filteredPokemons: action.payload === "ALL" ? [] : state.pokemons.filter((pokemon) => (action.payload === "API" ? typeof pokemon.id === "number" : typeof pokemon.id === "string")),
   };
-
 
   case FILTER_BY_TYPE:
       return {
@@ -155,15 +191,18 @@ case DELETE_POKEMON_FAILURE:
         }),
       };
 
+*/
+
   //* Reset filter
 
   case RESET_FILTERED_POKEMONS:
-    return {
-      ...state,
-      isFiltered: false,
-      filteredPokemons: [],
-      sorted:[],
-    };
+  return {
+    ...state,
+    isFilteredType: false,
+    isFilteredOrigin: false,
+    filteredPokemons: [],
+    sorted: [],
+  };
 
     case RESET_NAME:
       return {
@@ -174,17 +213,21 @@ case DELETE_POKEMON_FAILURE:
 
   //* Ordenamiento
 
-  case SORT_POKEMONS:
-    const { sortBy, sortOrder } = action.payload;
-    let sortedPokemons = state.isFiltered ? [...state.filteredPokemons] : [...state.pokemons];
-  
-    if (sortBy === "id") {
-      sortedPokemons.sort((a, b) => {
-        const idA = typeof a.id === 'string' ? parseInt(a.id.match(/\d+/)[0]) : a.id;
-        const idB = typeof b.id === 'string' ? parseInt(b.id.match(/\d+/)[0]) : b.id;
-  
-        return sortOrder === "asc" ? idA - idB : idB - idA;
-      });
+ // ...
+
+case SORT_POKEMONS:
+  const { sortBy, sortOrder } = action.payload;
+  let sortedPokemons = state.isFiltered // Combinar con resultados previos si hay un filtro aplicado
+    ? [...state.filteredPokemons]
+    : [...state.pokemons];
+
+  if (sortBy === "id") {
+    sortedPokemons.sort((a, b) => {
+      const idA = typeof a.id === 'string' ? parseInt(a.id.match(/\d+/)[0]) : a.id;
+      const idB = typeof b.id === 'string' ? parseInt(b.id.match(/\d+/)[0]) : b.id;
+
+      return sortOrder === "asc" ? idA - idB : idB - idA;
+    });
   } else if (sortBy === "attack") {
     sortedPokemons.sort((a, b) => (sortOrder === "asc" ? a.attack - b.attack : b.attack - a.attack));
   }
@@ -194,6 +237,9 @@ case DELETE_POKEMON_FAILURE:
     filteredPokemons: sortedPokemons,
 };
 
+// ...
+
+
 
     default:
       return state;
@@ -202,3 +248,5 @@ case DELETE_POKEMON_FAILURE:
 
 
 export default reducer;
+
+

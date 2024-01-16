@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { putPokemon } from '../../redux/actions'; // Asegúrate de importar la acción necesaria
+import { useNavigate, Link } from 'react-router-dom';
 import validation from '../../utils/validation';
 import styles from './PutForm.module.css'; // Asegúrate de tener los estilos adecuados
-import validations from '../../utils/validation';
+import validationsPut from '../../utils/validation';
 
 
 const PureForm = ({ selectedPokemon, onClose }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const types = useSelector((state) => state.types);
 
   const [formData, setFormData] = useState({
@@ -56,14 +58,28 @@ const PureForm = ({ selectedPokemon, onClose }) => {
         case "speed":
         case "height":
         case "weight":
-          newErrors[name] = validation({ ...formData, [name]: value })[name];
+          case"totalStats":
+          newErrors[name] = validationsPut({ ...formData, [name]: value })[name];
           break;
         default:
           break;
       }
   
-      setErrors(newErrors);
-    };
+      const totalStats = ['life', 'attack', 'defense', 'speed'];
+      const totalStatsSum = totalStats.reduce((sum, field) => {
+        return sum + (formData[field] ? parseFloat(formData[field]) : 0);
+      }, 0);
+    
+      if (totalStatsSum > 250) {
+        newErrors.totalStats = 'Sum of life, attack, defense and speed cannot exceed 250 in total';
+      } else {
+        newErrors.totalStats = ''; 
+      }
+    
+      
+          setErrors(newErrors);
+        };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,9 +96,14 @@ const PureForm = ({ selectedPokemon, onClose }) => {
     // Aquí envías la solicitud de actualización al servidor
     dispatch(putPokemon(selectedPokemon.id, formData));
 
-    // Cerrar el formulario o realizar alguna otra acción después de la actualización
-    onClose();
-  };
+    navigate("/home");
+    //!!Pensar como traer id del back y navigate hacia eso.
+    
+      // Cerrar el formulario o realizar alguna otra acción después de la actualización
+      onClose();
+
+    };
+
 
   return (
     <div className={styles.container}>
@@ -168,6 +189,7 @@ const PureForm = ({ selectedPokemon, onClose }) => {
             onChange={handleChange}
           />
           <span className={styles.error}>{errors.speed && errors.speed}</span>
+          <span className={styles.error}>{errors.totalStats && errors.totalStats}</span>
         </div>
 
         <div className={styles.formGroup}>
@@ -199,7 +221,7 @@ const PureForm = ({ selectedPokemon, onClose }) => {
 
         <span> Choose up to 2 types </span>
         <br />
-        <select name="type1" value={formData.type1} onChange={handleChange} required>
+        <select className={styles.select} name="type1" value={formData.type1} onChange={handleChange} required>
           <option value="" disabled>
             Select first type
           </option>
@@ -214,7 +236,7 @@ const PureForm = ({ selectedPokemon, onClose }) => {
           ))}
         </select>
 
-        <select name="type2" value={formData.type2} onChange={handleChange} disabled={formData.type1 === ""}>
+        <select className={styles.select} name="type2" value={formData.type2} onChange={handleChange} disabled={formData.type1 === ""}>
           <option value="" disabled>
             Select second type
           </option>
@@ -232,17 +254,24 @@ const PureForm = ({ selectedPokemon, onClose }) => {
           ))}
         </select>
 
+
+
+        <Link to={'/home'}>
+
         <button
           type="submit"
           className={styles.button}
           disabled={Object.values(errors).some((error) => error && error.length > 0)}
-        >
+          >
           <span className={styles.button_top} onClick={handleSubmit}> Update Pokemon </span>
         </button>
+          </Link>
 
         <button type="button" className={styles.button} onClick={onClose}>
           <span className={styles.button_top}> Cancel </span>
         </button>
+
+
       </form>
     </div>
   );

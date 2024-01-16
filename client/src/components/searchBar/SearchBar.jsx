@@ -7,12 +7,6 @@ import {searchPokemonByName, resetName } from '../../redux/actions'
 
 const SearchBar = () => {
 
-  const filteredOrigin = useSelector((state) => state.filteredOrigin); 
-  const filteredtype = useSelector((state) => state.filteredtype); 
-
-  console.log('llegan los filtrados por tipo', filteredtype);
-  console.log('llegan los filtrados de origen', filteredOrigin);
-
 const dispatch = useDispatch();
 
 const [inputValue, setInputValue] = useState('')
@@ -42,6 +36,10 @@ if (inputValue.trim() === '') {
    return (
       <div className={styles.container}>
 
+      <button className={styles.button} onClick={clearSearch}>
+        <span className={styles.button_top}>Clear search</span>
+      </button>
+      
       <button className={styles.button} onClick={handleSearch}>
         <span className={styles.button_top}>Search Pokemon</span>
       </button>
@@ -53,9 +51,6 @@ if (inputValue.trim() === '') {
       />
 
 
-      <button className={styles.button} onClick={clearSearch}>
-        <span className={styles.button_top}>Clear search</span>
-      </button>
 
 
       </div>

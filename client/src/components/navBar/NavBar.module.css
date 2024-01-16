@@ -6,26 +6,55 @@
    }
 
 
-/* Tu archivo de estilos o módulo CSS */
+   .divSearchFilter {
+    display: flex;
+    flex-direction: row;
+    margin-left: 100px;
+  }
+
 .divFilter {
   display: flex;
-  justify-content: space-evenly;
-  /* background-color: darkgreen; */
-  margin-top: 30px;
+width: 92%;
+height: 50px;
+justify-content: flex-end;
+align-items: center;
+align-content: center;
+margin-top: 15px;
 }
 
 .containerFilter {
   display: flex;
-  align-items: center;
-  margin-right: 20px; /* Ajusta según tu preferencia para agregar espacio entre los grupos de filtro */
   color: #000;
   font-size: 16px;
 }
 
+.containerReset {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width:50% ;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2px;
+  margin-left: 20px;
+}
+
 .h3{
   white-space: nowrap;
+  align-self: center;
   font-size: 23px;
   margin: 5px;
+}
+
+.h2{
+  font-size: 22px;
+  color: #c8f785;
+  text-shadow: -1px -1px 0.7px black, 1px -1px 0.7px black, -1px 0.7px 0.7px black, 0.7px 0.7px 0.7px black; 
+  white-space: wrap;
+  width: 70%;
+  line-height: 1;
+  padding-left: 10px;
+  
 }
 
   .select {
@@ -84,5 +113,42 @@
     }
     
     .button:active .button_top {
+      transform: translateY(0);
+    }
+
+    .buttonCreate {
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: bold;
+      border: 1px solid #000000; /* Borde negro */
+      border-radius: 0.70em;
+      padding: 1px;
+      background: #000000; /* Fondo gris claro */
+      margin: 3px;
+      font-family: 'VT323', monospace;
+      font-size: 20;
+      text-transform: uppercase;
+    }
+    
+    .buttonCreate_top {
+      display: block;
+      box-sizing: border-box;
+      border: 2px solid #000; /* Borde negro */
+      border-radius: 0.60em;
+      background: #B1E56A; /* Fondo gris claro */
+      color: #000; /* Texto negro */
+      transform: translateY(-0.05em);
+      padding: 6px;
+      transition: transform 0.1s ease;
+      font-family: 'VT323', monospace;
+      font-size: 20;
+      text-transform: uppercase;
+    }
+    
+    .buttonCreate:hover .buttonCreate_top {
+      transform: translateY(-0.33em);
+    }
+    
+    .buttonCreate:active .buttonCreate_top {
       transform: translateY(0);
     }

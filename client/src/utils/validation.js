@@ -9,16 +9,20 @@ const validations = (formData) => {
   }
 
   if (formData.name === "") {
-    errors.name = "El nombre es obligatorio";
+    errors.name = "Name is required";
+  }
+
+  if (formData.name.length > 15) {
+    errors.name = "Name must not be more than 15 characters";
   }
 
   // Image
   if (!/(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(formData.image)) {
-    errors.image = "Debe ser una URL válida";
+    errors.image = "URL must be valid";
   }
 
   if (formData.image === "") {
-    errors.image = "La URL es obligatoria";
+    errors.image = "URL is required";
   }
 
   // Life, Attack, Defense
@@ -26,11 +30,11 @@ const validations = (formData) => {
 
   numberFields.forEach((field) => {
     if (isNaN(formData[field])) {
-      errors[field] = `El campo ${field} debe ser un número`;
+      errors[field] = `${field} must be a number`;
     }
 
     if (formData[field] === "") {
-      errors[field] = `El campo ${field} es obligatorio`;
+      errors[field] = `${field} is required`;
     }
   });
 
@@ -40,10 +44,20 @@ const validations = (formData) => {
 
    numberExtras.forEach((field) => {
      if (isNaN(formData[field])) {
-       errors[field] = `El campo ${field} debe ser un número`;
+       errors[field] = `${field} must be a number`;
      }
 
    });
+
+   // Validar la suma de life, attack, defense y speed
+const totalStats = ['life', 'attack', 'defense', 'speed'];
+const totalStatsSum = totalStats.reduce((sum, field) => {
+  return sum + (formData[field] ? parseFloat(formData[field]) : 0);
+}, 0);
+
+if (totalStatsSum > 250) {
+  errors.totalStats = 'Sum of life, attack, defense and speed cannot exceed 250 in total';
+}
 
   return errors;
 };

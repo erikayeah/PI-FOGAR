@@ -24,11 +24,11 @@
   }
   
   .container.ground {
-    background: linear-gradient(to top, #e0c068, #ffffff);
+    background: linear-gradient(to top, #c2af7d, #ffffff);
   }
   
   .container.rock {
-    background: linear-gradient(to top, #b8a038, #ffffff);
+    background: linear-gradient(to top, #605938, #ffffff);
   }
   
   .container.bug {
@@ -64,7 +64,7 @@
   }
   
   .container.ice {
-    background: linear-gradient(to top, #98d8d8, #ffffff);
+    background: linear-gradient(to top, #a9ffff, #ffffff);
   }
   
   .container.dragon {

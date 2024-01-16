@@ -9,7 +9,7 @@ const Cards = ({pokemons}) => {
 
   const renderCards = () => {
     if (!pokemons || pokemons.length === 0) {
-      return <p className={styles.text}> Oh... there are no Pokémon to show </p>;
+      return <p className={styles.text}> Oops, there are no pokemon to show </p>;
     }
 
     return pokemons.map((pokemon, index) => (

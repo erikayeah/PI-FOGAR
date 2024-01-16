@@ -1,20 +1,28 @@
 // DetailPage.js
-import React from "react";
+import {useEffect}from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./DetailPage.module.css";
-import { Link } from "react-router-dom";
-import { putPokemon } from "../../redux/actions";
+import { Link , useNavigate} from "react-router-dom";
 import { useState } from "react";
 import PureForm from "../putForm/putForm";
+import { deletePokemon } from '../../redux/actions';
 
 const DetailPage = () => {
   const selectedPokemon = useSelector((state) => state.selectedPokemon);
+  const navigate = useNavigate();
   //!
   //!
   const dispatch = useDispatch();
   const [isEditing, setEditing] = useState(false);
 //!
 //!
+
+useEffect(() => {
+  // Aquí puedes realizar alguna acción después de que se actualiza el Pokémon
+  console.log("Pokémon actualizado:", selectedPokemon);
+
+  // Puedes agregar más lógica según sea necesario
+}, [selectedPokemon]);
 
  if (!selectedPokemon) {
    return <p> Ups! try again </p>;
@@ -39,32 +47,52 @@ const handleFormClose = () => {
   setEditing(false);
 };
 
-const handleFormSubmit = (formData) => {
-  // Envía la solicitud de actualización al servidor
-  dispatch(putPokemon(selectedPokemon.id, formData));
+const handleDelete = () => {
+  // Muestra una alerta de confirmación
+  const isConfirmed = window.confirm("You are going to eliminate this pokemon ¿Are you sure?");
+  // Si el usuario hace clic en "Aceptar", procede con la eliminación
+  if (isConfirmed) {
+    try {
 
-  // Deshabilita la edición después de la actualización
-  setEditing(false);
+      dispatch(deletePokemon(selectedPokemon.id));
+      navigate('/home');
+      
+    } catch (error) {
+      console.error('Error al eliminar el Pokémon', error);
+      // Lógica de manejo de errores si es necesario
+    }
+  }
 };
-
-
 
 
 return (
   <div className={styles.container}>
     <div className={styles.image}>
-      <img src={selectedPokemon.image} alt="" />
-      <br />
-      <br />
       <Link to={'/home'}>
         <button className={styles.button}>
           <span className={styles.button_top}> Back </span>
         </button>
       </Link>
+      <br />
+      <br />
+      <img src={selectedPokemon.image} alt="" />
+      <br />
+      <br />
 
-      <button className={styles.button} onClick={handleUpdateClick}>
-        <span className={styles.button_top}> Update </span>
-      </button>
+
+
+      {isNaN(selectedPokemon.id) && (
+          <button className={styles.button} onClick={handleUpdateClick}>
+          <span className={styles.button_top}> Update </span>
+        </button>
+        )}
+
+{isNaN(selectedPokemon.id) && (
+          <button className={styles.button} onClick={handleDelete}>
+            <span className={styles.button_top}> Eliminar </span>
+          </button>
+        )}
+
     </div>
     <div className={styles.details}>
       {isEditing ? (

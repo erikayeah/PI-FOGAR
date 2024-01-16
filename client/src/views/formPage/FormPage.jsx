@@ -33,6 +33,7 @@ const FormPage = () => {
       speed: "",
       height: "",
       weight: "",
+      totalStats: "",
     });
 
 
@@ -59,11 +60,24 @@ const FormPage = () => {
         case "speed":
         case "height":
         case "weight":
+          case"totalStats":
           newErrors[name] = validation({ ...formData, [name]: value })[name];
           break;
         default:
           break;
       }
+
+      const totalStats = ['life', 'attack', 'defense', 'speed'];
+  const totalStatsSum = totalStats.reduce((sum, field) => {
+    return sum + (formData[field] ? parseFloat(formData[field]) : 0);
+  }, 0);
+
+  if (totalStatsSum > 250) {
+    newErrors.totalStats = 'Sum of life, attack, defense and speed cannot exceed 250 in total';
+  } else {
+    newErrors.totalStats = ''; 
+  }
+
   
       setErrors(newErrors);
     };
@@ -100,6 +114,14 @@ const FormPage = () => {
 
   return (
     <div className={styles.container}>
+
+<Link to="/home">
+        <button className={styles.button}> 
+        <span className={styles.button_top}> Back to home</span> 
+        </button>
+         </Link>
+
+
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="name"> Name </label>
@@ -112,6 +134,7 @@ const FormPage = () => {
             onChange={handleChange}
             required
           />
+          <br />
           <span className={styles.error} > {errors.name && errors.name} </span>
         </div>
 
@@ -126,6 +149,7 @@ const FormPage = () => {
             onChange={handleChange}
             required
           />
+           <br />
           <span className={styles.error} >{errors.image && errors.image}</span>
         </div>
 
@@ -140,6 +164,7 @@ const FormPage = () => {
             onChange={handleChange}
             required
           />
+           <br />
           <span className={styles.error}>{errors.life && errors.life}</span>
         </div>
 
@@ -154,6 +179,7 @@ const FormPage = () => {
             onChange={handleChange}
             required
           />
+           <br />
           <span className={styles.error}>{errors.attack && errors.attack}</span>
         </div>
 
@@ -168,6 +194,7 @@ const FormPage = () => {
             onChange={handleChange}
             required
           />
+           <br />
           <span className={styles.error}>{errors.defense && errors.defense}</span>
         </div>
 
@@ -181,7 +208,10 @@ const FormPage = () => {
             placeholder="Optional: enter speed"
             onChange={handleChange}
           />
+           <br />
           <span className={styles.error}>{errors.speed && errors.speed}</span>
+
+          <span className={styles.error}>{errors.totalStats && errors.totalStats}</span>
         </div>
 
         <div className={styles.formGroup}>
@@ -194,6 +224,7 @@ const FormPage = () => {
             placeholder="Optional: enter height"
             onChange={handleChange}
           />
+           <br />
           <span className={styles.error}>{errors.height && errors.height}</span>
         </div>
 
@@ -207,12 +238,13 @@ const FormPage = () => {
             placeholder="Optional: enter weight"
             onChange={handleChange}
           />
+           <br />
           <span className={styles.error}>{errors.weight && errors.weight}</span>
         </div>
 
    <span> Choose up to 2 types </span>
    <br />
-        <select name="type1" value={formData.type1} onChange={handleChange} required>
+        <select className={styles.select} name="type1" value={formData.type1} onChange={handleChange} required>
   <option value="" disabled>Select first type</option>
   {types.map((type) => (
     <option key={type.id} value={type.name} disabled={formData.types.includes(type.name) || formData.types.length >= 2}>
@@ -221,7 +253,7 @@ const FormPage = () => {
   ))}
 </select>
 
-<select name="type2" value={formData.type2} onChange={handleChange} disabled={formData.type1 === ""}>
+<select className={styles.select} name="type2" value={formData.type2} onChange={handleChange} disabled={formData.type1 === ""}>
   <option value="" disabled>Select second type</option>
   <option value="" disabled={formData.type1 === ""}> None </option>
   {types.map((type) => (
@@ -236,12 +268,6 @@ const FormPage = () => {
 <button type="submit" className={styles.button} disabled={Object.values(errors).some((error) => error && error.length > 0)}>
           <span className={styles.button_top}> Create pokemon </span>
         </button>
-
-         <Link to="/home">
-        <button className={styles.button}> 
-        <span className={styles.button_top}> Back to home</span> 
-        </button>
-         </Link>
 
       </form>
     </div>

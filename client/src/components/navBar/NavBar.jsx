@@ -32,8 +32,7 @@ const handleTypeFilter = (event) => {
  
  const handleClearFilter = () => {
    dispatch(resetFilteredPokemons())
-   dispatch(sortPokemons("", ""));
-   dispatch(fetchPokemons());
+  //  window.location.reload();
  }
 
 
@@ -48,6 +47,8 @@ const handleTypeFilter = (event) => {
 
       <div className = {styles.container}>
 
+        
+
       <div className = {styles.searchBar}>
 
       {/* <Link to={'/home'}>
@@ -56,20 +57,26 @@ const handleTypeFilter = (event) => {
 
          <SearchBar />
          <Link to={'/post'}>
-         <button className={styles.button} > 
-         <span className={styles.button_top}> Create pokemon </span>
+         <button className={styles.buttonCreate} > 
+         <span className={styles.buttonCreate_top}> Create pokemon </span>
          </button>
          </Link>
 
 
 
       </div>
+  <div className={styles.containerReset}>
 
-      <div className={styles.divFilter}>
 
+     </div>
+
+    
+<div  className={styles.divSearchFilter}> 
+<div className={styles.divFilter}>
+<div className={styles.divFilter}> 
         <div className = {styles.containerFilter} >
 
-        <h3 className={styles.h3} >Filter by origin</h3>
+        <h3 className={styles.h3} >Origin</h3>
         <select className={styles.select} onChange={handleOriginFilter}>
           <option value="ALL">ALL</option>
           <option value="API">API</option>
@@ -78,7 +85,7 @@ const handleTypeFilter = (event) => {
         </div>
 
 <div className = {styles.containerFilter}>
-        <h3 className={styles.h3}>Filter by type</h3>
+        <h3 className={styles.h3}>Type</h3>
         <select className={styles.select} onChange={handleTypeFilter}>
           <option value="ALL">ALL</option>
           {types.map((type) => (
@@ -102,18 +109,18 @@ const handleTypeFilter = (event) => {
 
 
      </div>
-     <div className={styles.containerReset}>
+      <div className={styles.containerReset}>
 
-     {/* <h2  className={styles.h2}> Clear filters </h2> */}
-    <button className={styles.button} onClick = {handleClearFilter} >
-      <span className={styles.button_top}>reset filter</span>
-    </button>
+<h2  className={styles.h2}> Reset before new filtering </h2>
+<button className={styles.button} onClick = {handleClearFilter} >
+ <span className={styles.button_top}>reset filter</span>
+</button>
 
+</div>
      </div>
-
       </div>
 
-
+      </div>
       </div>
    )
 }

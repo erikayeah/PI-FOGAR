@@ -1,13 +1,12 @@
 import styles from "./Card.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch} from "react-redux";
 import { setSelectedPokemon} from "../../redux/actions";
-import { deletePokemon, fetchPokemons } from '../../redux/actions';
+import { deletePokemon } from '../../redux/actions';
 
 const Card = ({ pokemon }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   const { id, name, types, image, life, attack, defense, speed, height, weight,
   } = pokemon;
@@ -24,23 +23,23 @@ const firstType = normalizedTypes.length > 0 ? normalizedTypes[0].name : null;
    dispatch(setSelectedPokemon(pokemon));
  };
 
- const handleDelete = () => {
-  // Muestra una alerta de confirmación
-  const isConfirmed = window.confirm("You are going to eliminate this pokemon ¿Are you sure?");
-  // Si el usuario hace clic en "Aceptar", procede con la eliminación
-  if (isConfirmed) {
-    try {
+//  const handleDelete = () => {
+//   // Muestra una alerta de confirmación
+//   const isConfirmed = window.confirm("You are going to eliminate this pokemon ¿Are you sure?");
+//   // Si el usuario hace clic en "Aceptar", procede con la eliminación
+//   if (isConfirmed) {
+//     try {
 
-      dispatch(deletePokemon(pokemon.id));
-      navigate('/home');
-      window.location.reload();
+//       dispatch(deletePokemon(pokemon.id));
+//       navigate('/home');
+//       window.location.reload();
       
-    } catch (error) {
-      console.error('Error al eliminar el Pokémon', error);
-      // Lógica de manejo de errores si es necesario
-    }
-  }
-};
+//     } catch (error) {
+//       console.error('Error al eliminar el Pokémon', error);
+//       // Lógica de manejo de errores si es necesario
+//     }
+//   }
+// };
 
 
 
@@ -59,11 +58,11 @@ const firstType = normalizedTypes.length > 0 ? normalizedTypes[0].name : null;
           </button>
         </Link>
 
-        {isNaN(pokemon.id) && (
+        {/* {isNaN(pokemon.id) && (
           <button className={styles.button} onClick={handleDelete}>
             Eliminar
           </button>
-        )}
+        )} */}
         </div>
 
   </div>

@@ -1,25 +1,20 @@
 /* FormPage.module.css */
 
 .container {
-   max-width: 400px;
-   margin: auto;
+   max-width: 500px;
    padding: 20px;
+   color: #000;
+   background-color: transparent;
+   backdrop-filter: blur(4px); /* Ajusta el valor de blur según tus preferencias */
+  filter: blur(0);
+   text-align: left; /* Alinea el contenido a la izquierda */
+   font-size: 20px;
+   margin-bottom: 150px;
+   border-radius: 30px;
  }
  
  .formGroup {
    margin-bottom: 20px;
- }
- 
- .label {
-   display: block;
-   font-weight: bold;
-   margin-bottom: 5px;
- }
- 
- .input {
-   width: 100%;
-   padding: 8px;
-   box-sizing: border-box;
  }
  
  .error {
@@ -36,10 +31,10 @@
   border-radius: 0.70em;
   padding: 1px;
   background: #000000; /* Fondo gris claro */
-  margin: 3px;
   font-family: 'VT323', monospace;
   font-size: 20;
   text-transform: uppercase;
+  margin-bottom: 50px;
 }
 
 .button_top {
@@ -77,4 +72,30 @@
   border-color: #ff0000; /* Cambia el color del borde de button_top cuando el botón está deshabilitado */
   color: #666666; /* Cambia el color del texto de button_top cuando el botón está deshabilitado */
   cursor: not-allowed; 
+}
+
+.input{
+  background-color: transparent;
+  color: black;
+  border-bottom: 1px solid black;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  text-align: left;
+}
+
+.select {
+  color: #000;
+  background-color: white;
+  font-family: 'VT323', monospace;
+  border-bottom: 1px solid black;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  margin-right: 7px;
+  width: 25%;
 }
