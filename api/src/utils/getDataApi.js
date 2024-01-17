@@ -1,6 +1,4 @@
 const getDataApi = async (data) => {
-
-
   const statsToRetrieve = ["hp", "attack", "defense", "speed"];
   const result = {};
 
@@ -9,7 +7,7 @@ const getDataApi = async (data) => {
     result[statName] = stat ? stat.base_stat : null;
   });
 
-//console.log('Aca el result', result);
+  //console.log('result in utils', result);
 
   const hp = result.hp;
   const attack = result.attack;

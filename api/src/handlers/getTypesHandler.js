@@ -1,7 +1,6 @@
 const getTypes = require("../controllers/getTypes");
 
 const getTypesHandler = async (req, res) => {
-
   try {
     const types = await getTypes();
     res.status(200).json(types);

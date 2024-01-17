@@ -1,19 +1,31 @@
 const { Pokemons, Type } = require("../db.js");
-const axios = require ('axios')
+const axios = require("axios");
 
 const URL = "https://pokeapi.co/api/v2/pokemon/";
 
-const postPokemon = async ({ name, image, life, attack, defense, speed, height, weight, types }) => {
-
-  const existingPokemon = await Pokemons.findOne({ where: { name: name } });
-  
-  if(existingPokemon){throw Error ('Pokemon with this name already exists')}
-
-
+const postPokemon = async ({
+  name,
+  image,
+  life,
+  attack,
+  defense,
+  speed,
+  height,
+  weight,
+  types,
+}) => {
   try {
+    const existingPokemon = await Pokemons.findOne({
+      where: { name: name.toLowerCase() },
+    });
+
+    if (existingPokemon) {
+      throw new Error("Pokemon with this name already exists");
+    }
+
     const response = await axios.get(`${URL}${name.toLowerCase()}`);
     if (response.data) {
-      throw Error("Pokemon with this name already exists");
+      throw new Error("Pokemon with this name already exists");
     }
   } catch (error) {
     if (error.response && error.response.status !== 404) {
@@ -21,30 +33,27 @@ const postPokemon = async ({ name, image, life, attack, defense, speed, height, 
     }
   }
 
-  console.log('como llega types', types);
-    
   let typesInstances = [];
-    
-   for (let typeName of types) {
-     let typeInstance = await Type.findOrCreate({ where: { name: typeName } });
-     typesInstances.push(typeInstance[0]);
-   }
 
-   let newPokemon = await Pokemons.create({
-    name,
+  for (let typeName of types) {
+    let typeInstance = await Type.findOrCreate({ where: { name: typeName } });
+    typesInstances.push(typeInstance[0]);
+  }
+
+  let newPokemon = await Pokemons.create({
+    name: name.toLowerCase(),
     image,
     life,
     attack,
     defense,
-    speed: speed || null, // Asignar null si no está presente
-    height: height || null, // Asignar null si no está presente
-    weight: weight || null, // Asignar null si no está presente
+    speed: speed || null,
+    height: height || null,
+    weight: weight || null,
   });
 
-    await newPokemon.setTypes(typesInstances);
+  await newPokemon.setTypes(typesInstances);
 
-    return newPokemon;
- 
+  return newPokemon;
 };
 
 module.exports = postPokemon;

@@ -6,31 +6,26 @@ const { Pokemons, Type } = require("../db.js");
 const URL = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemonByName = async (name) => {
-  
-  // if (name.length === 0) {
-  //   throw Error("Error name not defined");
-  // }
+  const lowerCase = name.toLowerCase();
 
-    const lowerCase = name.toLowerCase();
-
-    const dbPokemon = await Pokemons.findAll({ // return an [].
-      where: {
-        name: {
-          [Op.iLike]: `%${lowerCase}%`,
-        },
+  const dbPokemon = await Pokemons.findAll({
+    // return an [].
+    where: {
+      name: {
+        [Op.iLike]: `%${lowerCase}%`,
       },
-      include: [Type],
-    });
+    },
+    include: [Type],
+  });
 
-    if (dbPokemon && dbPokemon.length > 0) {
-      return dbPokemon;
-    } else {
-      const {data} = await axios(`${URL}/${lowerCase}`);
-      const filteredData = await getDataApi(data);
+  if (dbPokemon && dbPokemon.length > 0) {
+    return dbPokemon;
+  } else {
+    const { data } = await axios(`${URL}/${lowerCase}`);
+    const filteredData = await getDataApi(data);
 
-      return filteredData;
-    }
- 
+    return filteredData;
+  }
 };
 
 /* With Promise 
@@ -65,4 +60,3 @@ const getPokemonByName = async (name) => {
 */
 
 module.exports = getPokemonByName;
-
