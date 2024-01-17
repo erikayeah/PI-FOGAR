@@ -5,10 +5,10 @@ import {
   FETCH_POKEMONS_FAILURE,
   SET_SELECTED_POKEMON,
   CREATE_POKEMON_SUCCESS,
-  CREATE_POKEMON_ERROR, 
+  CREATE_POKEMON_ERROR,
   FETCH_TYPES_SUCCESS,
   FETCH_TYPES_FAILURE,
-  DELETE_POKEMON_SUCCESS, 
+  DELETE_POKEMON_SUCCESS,
   DELETE_POKEMON_FAILURE,
   FILTER_BY_ORIGIN,
   FILTER_BY_TYPE,
@@ -17,19 +17,13 @@ import {
   SEARCH_POKEMON,
   RESET_NAME,
   PUT_POKEMON,
-  RESET_FILTER
+  RESET_FILTER,
 } from "./action-types";
 
-const URL = 'http://localhost:3001/pokemon'   
+const URL = "http://localhost:3001/pokemon";
 
-//*Put pokemon
-
+//* Put pokemon
 export const putPokemon = (pokemonId, updatedData) => async (dispatch) => {
-
-// console.log('llega de id', pokemonId);
-// console.log('llega de info body', updatedData);
-  //* LLega bien
-
   try {
     const response = await axios.put(`${URL}/put/${pokemonId}`, updatedData);
     dispatch({ type: PUT_POKEMON, payload: response.data });
@@ -40,26 +34,22 @@ export const putPokemon = (pokemonId, updatedData) => async (dispatch) => {
 
 //* Get detail by ID
 export const setSelectedPokemon = (pokemon) => ({
-   type: SET_SELECTED_POKEMON,
-   payload: pokemon,
- });
+  type: SET_SELECTED_POKEMON,
+  payload: pokemon,
+});
 
- //* Get by name
-
- export const searchPokemonByName = (name) => async (dispatch) => {
-
+//* Get by name
+export const searchPokemonByName = (name) => async (dispatch) => {
   try {
     const response = await axios.get(`${URL}/name?name=${name}`);
-    const data = response.data
+    const data = response.data;
 
     dispatch({ type: SEARCH_POKEMON, payload: data });
-    
   } catch (error) {
-    alert(`There is no pokemon with the name ${name}`)
+    alert(`There is no pokemon with the name ${name}`);
     dispatch({ type: SEARCH_POKEMON, payload: [] });
   }
 };
-
 
 //* Get pokemons to Home
 export const fetchPokemonsSuccess = (pokemons) => ({
@@ -79,18 +69,15 @@ export const fetchPokemons = () => {
       dispatch(fetchPokemonsSuccess(response.data));
     } catch (error) {
       dispatch(fetchPokemonsFailure(error));
-
     }
   };
 };
 
-
 //* Create pokemon
-
 export const createPokemon = (pokemonData) => async (dispatch) => {
-  console.log('data pokemon action', pokemonData); 
+  //console.log("data pokemon action", pokemonData);
   try {
-    const response = await axios.post(`${URL}/post`, pokemonData); 
+    const response = await axios.post(`${URL}/post`, pokemonData);
     // Despacha alguna acción para manejar el resultado (puedes actualizar el estado de los Pokémon)
     dispatch({ type: CREATE_POKEMON_SUCCESS, payload: response.data });
   } catch (error) {
@@ -109,9 +96,7 @@ export const fetchTypes = () => async (dispatch) => {
   }
 };
 
-
 //* Delete Pokemon
-
 export const deletePokemonSuccess = () => ({
   type: DELETE_POKEMON_SUCCESS,
 });
@@ -131,7 +116,6 @@ export const deletePokemon = (id) => async (dispatch) => {
 };
 
 //* Filtered by Origin
-
 export const filterByOrigin = (origin) => {
   return (dispatch) => {
     dispatch({
@@ -142,41 +126,36 @@ export const filterByOrigin = (origin) => {
 };
 
 //* Filtered by Type
-
 export const filterByType = (pokemonType) => {
   return (dispatch) => {
     if (pokemonType === "ALL") {
-      // Si elige "ALL", no aplicar ningún filtro y restablecer el filtro de origen
       dispatch({
         type: FILTER_BY_TYPE,
         payload: null,
       });
     } else {
-    dispatch({
-      type: FILTER_BY_TYPE,
-      payload: pokemonType,
-    });
+      dispatch({
+        type: FILTER_BY_TYPE,
+        payload: pokemonType,
+      });
+    }
   };
-  }}
+};
 
+//* Reset filter
+export const resetFilteredPokemons = () => ({
+  type: RESET_FILTERED_POKEMONS,
+});
 
-  //* Reset filter
-  export const resetFilteredPokemons = () => ({
-    type: RESET_FILTERED_POKEMONS,
-  });
+//* Reset Name
+export const resetName = () => ({
+  type: RESET_NAME,
+});
 
-
-  //* Reset Name
-  export const resetName = () => ({
-    type: RESET_NAME,
-  });
-
-
-
-  //* Ordenamiento
-  export const sortPokemons = (sortBy, sortOrder) => {
-    return {
-      type: SORT_POKEMONS,
-      payload: { sortBy, sortOrder },
-    };
+//* Ordenamiento
+export const sortPokemons = (sortBy, sortOrder) => {
+  return {
+    type: SORT_POKEMONS,
+    payload: { sortBy, sortOrder },
   };
+};

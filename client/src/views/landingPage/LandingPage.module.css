@@ -2,7 +2,7 @@
   width: 500px;
   height: 500px;
   display: flex;
-  flex-direction: column; /* Agregada esta línea para establecer la dirección como columna */
+  flex-direction: column; 
   justify-content:flex-start;
   align-items: center;
   background-size: cover;
@@ -15,16 +15,16 @@
 
  .image {
   width: 350%;
-  height: 60%; /* Asegura que la altura se ajuste al contenedor */
+  height: 60%;
   margin: 2px;
   position: relative;
-  object-fit: scale-down; /* La propiedad clave para ajustar la imagen */
-  object-position: center; /* Asegura que la imagen se centre dentro del contenedor */
+  object-fit: scale-down; 
+  object-position: center; 
   margin-bottom: 180px;
 }
  
 
- /* Button.module.css */
+
 .btn {
    width: 150px;
    height: 50px;

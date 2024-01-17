@@ -1,37 +1,37 @@
 /* FormPage.module.css */
 
 .container {
-   max-width: 500px;
-   padding: 20px;
-   color: #000;
-   background-color: transparent;
-   backdrop-filter: blur(4px); /* Ajusta el valor de blur según tus preferencias */
+  max-width: 500px;
+  padding: 20px;
+  color: #000;
+  background-color: transparent;
+  backdrop-filter: blur(4px);
   filter: blur(0);
-   text-align: left; /* Alinea el contenido a la izquierda */
-   font-size: 20px;
-   margin-bottom: 150px;
-   border-radius: 30px;
- }
- 
- .formGroup {
-   margin-bottom: 20px;
- }
- 
- .error {
-   color: rgb(255, 0, 0);
-   font-size: 16px;
-   margin-top: 5px;
- }
+  text-align: left;
+  font-size: 20px;
+  margin-bottom: 150px;
+  border-radius: 30px;
+}
 
- .button {
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.error {
+  color: rgb(255, 0, 0);
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.button {
   cursor: pointer;
   font-size: 17px;
   font-weight: bold;
-  border: 1px solid #000000; /* Borde negro */
-  border-radius: 0.70em;
+  border: 1px solid #000000;
+  border-radius: 0.7em;
   padding: 1px;
-  background: #000000; /* Fondo gris claro */
-  font-family: 'VT323', monospace;
+  background: #000000;
+  font-family: "VT323", monospace;
   font-size: 20;
   text-transform: uppercase;
   margin-bottom: 50px;
@@ -40,14 +40,14 @@
 .button_top {
   display: block;
   box-sizing: border-box;
-  border: 2px solid #000; /* Borde negro */
-  border-radius: 0.60em;
-  background: #e8e8e8; /* Fondo gris claro */
-  color: #000; /* Texto negro */
+  border: 2px solid #000;
+  border-radius: 0.6em;
+  background: #e8e8e8;
+  color: #000;
   transform: translateY(-0.05em);
   padding: 6px;
   transition: transform 0.1s ease;
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
   font-size: 20;
   text-transform: uppercase;
 }
@@ -61,27 +61,27 @@
 }
 
 .button:disabled {
-  background-color: #ff0000; /* Cambia el color de fondo cuando el botón está deshabilitado */
-  border-color: #ff0000; /* Cambia el color del borde cuando el botón está deshabilitado */
-  color: #960000; /* Cambia el color del texto cuando el botón está deshabilitado */
-  cursor: not-allowed; /* Cambia el cursor cuando el botón está deshabilitado */
+  background-color: #ff0000;
+  border-color: #ff0000;
+  color: #960000;
+  cursor: not-allowed;
 }
 
 .button:disabled .button_top {
-  background-color: #ff9c9c; /* Cambia el color de fondo de button_top cuando el botón está deshabilitado */
-  border-color: #ff0000; /* Cambia el color del borde de button_top cuando el botón está deshabilitado */
-  color: #666666; /* Cambia el color del texto de button_top cuando el botón está deshabilitado */
-  cursor: not-allowed; 
+  background-color: #ff9c9c;
+  border-color: #ff0000;
+  color: #666666;
+  cursor: not-allowed;
 }
 
-.input{
+.input {
   background-color: transparent;
   color: black;
   border-bottom: 1px solid black;
   border-top: transparent;
   border-left: transparent;
   border-right: transparent;
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
   font-size: 18px;
   text-align: left;
 }
@@ -89,12 +89,12 @@
 .select {
   color: #000;
   background-color: white;
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
   border-bottom: 1px solid black;
   border-top: transparent;
   border-left: transparent;
   border-right: transparent;
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
   font-size: 20px;
   margin-right: 7px;
   width: 25%;

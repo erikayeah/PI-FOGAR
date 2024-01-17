@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323');
+@import url("https://fonts.googleapis.com/css2?family=VT323");
 
 :root {
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
   letter-spacing: 1px;
   line-height: 1.5;
   font-weight: 400;
@@ -21,18 +21,16 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url('./assets/images/fondo.png'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ruta correcta de tu imagen */
-  background-size: cover; /* Ajusta la imagen al tamaño de la ventana del navegador */
-  background-position: center; /* Centra la imagen en la pantalla */
-  background-attachment: fixed; /* Fija la imagen en su posición para que se comporte como un fondo */
-  background-repeat: no-repeat; /* Evita la repetición de la imagen */
-  font-family: 'Patrick Hand SC';
+  background-image: url("./assets/images/fondo.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-family: "Patrick Hand SC";
   letter-spacing: 1px;
-  
 }
 
-
 ::selection {
-  background-color: #30FBF7;
-  color: #270A36;
+  background-color: #30fbf7;
+  color: #270a36;
 }

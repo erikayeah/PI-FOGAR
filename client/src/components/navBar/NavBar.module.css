@@ -1,25 +1,23 @@
 .container {
-  /* background-color: #8f8f8f; Color de fondo similar al Gameboy */
-  border-bottom: 2px solid #000; /* Borde inferior que simula el estilo de los juegos de Gameboy */
-  color: #fff; /* Color del texto */
-  padding: 10px; /* Espaciado interno */
-   }
+  border-bottom: 2px solid #000; 
+  color: #fff; 
+  padding: 10px; 
+}
 
-
-   .divSearchFilter {
-    display: flex;
-    flex-direction: row;
-    margin-left: 100px;
-  }
+.divSearchFilter {
+  display: flex;
+  flex-direction: row;
+  margin-left: 100px;
+}
 
 .divFilter {
   display: flex;
-width: 100%;
-height: 50px;
-justify-content: flex-end;
-align-items: center;
-align-content: center;
-margin-top: 15px;
+  width: 100%;
+  height: 50px;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  margin-top: 15px;
 }
 
 .containerFilter {
@@ -32,123 +30,122 @@ margin-top: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  width:50% ;
+  width: 50%;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 2px;
   margin-left: 20px;
 }
 
-.h3{
+.h3 {
   white-space: nowrap;
   align-self: center;
   font-size: 23px;
   margin: 5px;
 }
 
-.h2{
+.h2 {
   font-size: 22px;
   color: #c8f785;
-  text-shadow: -1px -1px 0.7px black, 1px -1px 0.7px black, -1px 0.7px 0.7px black, 0.7px 0.7px 0.7px black; 
+  text-shadow: -1px -1px 0.7px black, 1px -1px 0.7px black,
+    -1px 0.7px 0.7px black, 0.7px 0.7px 0.7px black;
   white-space: wrap;
   width: 70%;
   line-height: 1;
   padding-left: 10px;
-  
 }
 
-  .select {
-    width: 100%;
-    padding: 5px;
-    box-sizing: border-box;
-    font-family: 'VT323', monospace;
-    font-size: 18px; /* Ajusta el tamaño de fuente según tus necesidades */
-    background-color: #fff;
-    color: #333;
-    margin: 8px;
-  }
-  
-  /* Ajusta el tamaño de fuente para las opciones del select */
-  .select option {
-    font-size: 18px; /* Ajusta el tamaño de fuente según tus necesidades */
-  }
-  
-    .searchBar{
-      display: flex;
-      justify-content: space-evenly; /* Ajusta esta línea */
-    }
+.select {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  font-family: "VT323", monospace;
+  font-size: 18px; 
+  background-color: #fff;
+  color: #333;
+  margin: 8px;
+}
 
 
-    .button {
-      cursor: pointer;
-      font-size: 17px;
-      font-weight: bold;
-      border: 1px solid #000000; /* Borde negro */
-      border-radius: 0.70em;
-      padding: 1px;
-      background: #000000; /* Fondo gris claro */
-      margin: 3px;
-      font-family: 'VT323', monospace;
-      font-size: 20;
-      text-transform: uppercase;
-    }
-    
-    .button_top {
-      display: block;
-      box-sizing: border-box;
-      border: 2px solid #000; /* Borde negro */
-      border-radius: 0.60em;
-      background: #e8e8e8; /* Fondo gris claro */
-      color: #000; /* Texto negro */
-      transform: translateY(-0.05em);
-      padding: 6px;
-      transition: transform 0.1s ease;
-      font-family: 'VT323', monospace;
-      font-size: 20;
-      text-transform: uppercase;
-    }
-    
-    .button:hover .button_top {
-      transform: translateY(-0.33em);
-    }
-    
-    .button:active .button_top {
-      transform: translateY(0);
-    }
+.select option {
+  font-size: 18px; 
+}
 
-    .buttonCreate {
-      cursor: pointer;
-      font-size: 17px;
-      font-weight: bold;
-      border: 1px solid #000000; /* Borde negro */
-      border-radius: 0.70em;
-      padding: 1px;
-      background: #000000; /* Fondo gris claro */
-      margin: 3px;
-      font-family: 'VT323', monospace;
-      font-size: 20;
-      text-transform: uppercase;
-    }
-    
-    .buttonCreate_top {
-      display: block;
-      box-sizing: border-box;
-      border: 2px solid #000; /* Borde negro */
-      border-radius: 0.60em;
-      background: #B1E56A; /* Fondo gris claro */
-      color: #000; /* Texto negro */
-      transform: translateY(-0.05em);
-      padding: 6px;
-      transition: transform 0.1s ease;
-      font-family: 'VT323', monospace;
-      font-size: 20;
-      text-transform: uppercase;
-    }
-    
-    .buttonCreate:hover .buttonCreate_top {
-      transform: translateY(-0.33em);
-    }
-    
-    .buttonCreate:active .buttonCreate_top {
-      transform: translateY(0);
-    }
+.searchBar {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button {
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bold;
+  border: 1px solid #000000; 
+  border-radius: 0.7em;
+  padding: 1px;
+  background: #000000; 
+  margin: 3px;
+  font-family: "VT323", monospace;
+  font-size: 20;
+  text-transform: uppercase;
+}
+
+.button_top {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid #000; 
+  border-radius: 0.6em;
+  background: #e8e8e8; 
+  color: #000;
+  transform: translateY(-0.05em);
+  padding: 6px;
+  transition: transform 0.1s ease;
+  font-family: "VT323", monospace;
+  font-size: 20;
+  text-transform: uppercase;
+}
+
+.button:hover .button_top {
+  transform: translateY(-0.33em);
+}
+
+.button:active .button_top {
+  transform: translateY(0);
+}
+
+.buttonCreate {
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bold;
+  border: 1px solid #000000; 
+  border-radius: 0.7em;
+  padding: 1px;
+  background: #000000; 
+  margin: 3px;
+  font-family: "VT323", monospace;
+  font-size: 20;
+  text-transform: uppercase;
+}
+
+.buttonCreate_top {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid #000; 
+  border-radius: 0.6em;
+  background: #b1e56a; 
+  color: #000; 
+  transform: translateY(-0.05em);
+  padding: 6px;
+  transition: transform 0.1s ease;
+  font-family: "VT323", monospace;
+  font-size: 20;
+  text-transform: uppercase;
+}
+
+.buttonCreate:hover .buttonCreate_top {
+  transform: translateY(-0.33em);
+}
+
+.buttonCreate:active .buttonCreate_top {
+  transform: translateY(0);
+}

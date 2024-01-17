@@ -1,21 +1,21 @@
 .container {
   background-color: transparent;
   border: 2px solid #000000;
-  backdrop-filter: blur(20px); /* Ajusta el valor de blur según tus preferencias */
+  backdrop-filter: blur(20px);
   filter: blur(0);
   display: flex;
-  justify-content: space-between; /* Distribuye los elementos a lo largo del eje principal (horizontal) */
-  align-items: center; /* Centra verticalmente los elementos en el contenedor */
-  padding: 10px; /* Añade espacio alrededor del contenido del contenedor */
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
   width: 600px;
   border-radius: 10px;
 }
 
 .image {
-  width: 200px; /* Ajusta el valor según tus necesidades */
-  margin: 10px auto; /* Combina las propiedades margin en una sola línea para centrar la imagen y agregar espacio */
+  width: 200px;
+  margin: 10px auto;
   position: relative;
-  object-fit: cover; /* Ajusta la forma en que la imagen se ajusta al contenedor */
+  object-fit: cover;
   padding: 15px;
 }
 
@@ -23,44 +23,44 @@
   width: 55%;
   margin-top: 10px;
   text-align: left;
-  text-transform: uppercase; /* Convierte el texto a mayúsculas */
-  line-height: 0.7; /* Ajusta la distancia entre líneas (ajusta según tus preferencias) */
+  text-transform: uppercase;
+  line-height: 0.7;
   color: #000;
 }
 
 .button {
-   font-size: 17px;
-   font-weight: bold;
-   border: 1px solid #000000; /* Borde negro */
-   border-radius: 0.70em;
-   padding: 1px;
-   background: #000000; /* Fondo gris claro */
-   margin: 3px;
-   font-family: 'VT323', monospace;
-   font-size: 20;
-   text-transform: uppercase;
-   cursor: pointer;
- }
- 
- .button_top {
-   display: block;
-   box-sizing: border-box;
-   border: 2px solid #000; /* Borde negro */
-   border-radius: 0.60em;
-   background: #e8e8e8; /* Fondo gris claro */
-   color: #000; /* Texto negro */
-   transform: translateY(-0.05em);
-   padding: 6px;
-   transition: transform 0.1s ease;
-   font-family: 'VT323', monospace;
-   font-size: 20;
-   text-transform: uppercase;
- }
- 
- .button:hover .button_top {
-   transform: translateY(-0.33em);
- }
- 
- .button:active .button_top {
-   transform: translateY(0);
- }
+  font-size: 17px;
+  font-weight: bold;
+  border: 1px solid #000000;
+  border-radius: 0.7em;
+  padding: 1px;
+  background: #000000;
+  margin: 3px;
+  font-family: "VT323", monospace;
+  font-size: 20;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button_top {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid #000;
+  border-radius: 0.6em;
+  background: #e8e8e8;
+  color: #000;
+  transform: translateY(-0.05em);
+  padding: 6px;
+  transition: transform 0.1s ease;
+  font-family: "VT323", monospace;
+  font-size: 20;
+  text-transform: uppercase;
+}
+
+.button:hover .button_top {
+  transform: translateY(-0.33em);
+}
+
+.button:active .button_top {
+  transform: translateY(0);
+}

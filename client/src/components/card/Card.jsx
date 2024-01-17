@@ -1,13 +1,12 @@
 import styles from "./Card.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch , useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSelectedPokemon } from "../../redux/actions";
-import { resetName} from "../../redux/actions"
-
+import { resetName } from "../../redux/actions";
 
 const Card = ({ pokemon }) => {
-  const dispatch = useDispatch();   
-  const searchResults= useSelector(state => state.searchResults); // Ya agregados al renderizar HomePage.
+  const dispatch = useDispatch();
+  const searchResults = useSelector((state) => state.searchResults);
 
   const {
     id,
@@ -22,7 +21,7 @@ const Card = ({ pokemon }) => {
     weight,
   } = pokemon;
 
-  // Normalización de la propiedad types
+  
   const normalizedTypes = types.map((type) =>
     typeof type === "string" ? { name: type } : type
   );
@@ -32,13 +31,10 @@ const Card = ({ pokemon }) => {
 
   const handleSeeMoreClick = async () => {
     dispatch(setSelectedPokemon(pokemon));
-
-
-    
   };
   const handleBack = () => {
-    dispatch(resetName ());
-  }
+    dispatch(resetName());
+  };
 
   return (
     <div
@@ -56,20 +52,23 @@ const Card = ({ pokemon }) => {
           </button>
         </Link>
 
-
-
         {Array.isArray(searchResults) && searchResults.length > 0 && (
-  <Link to={'/home'}>
-    <button className={styles.button} onClick={handleBack} > Back </button>
-  </Link>
-)}
+          <Link to={"/home"}>
+            <button className={styles.button} onClick={handleBack}>
+              {" "}
+              Back{" "}
+            </button>
+          </Link>
+        )}
 
-{!Array.isArray(searchResults) && searchResults.name && (
-  <Link to={'/home'}>
-    <button className={styles.button} onClick={handleBack }  > Back </button>
-  </Link>
-)}
-
+        {!Array.isArray(searchResults) && searchResults.name && (
+          <Link to={"/home"}>
+            <button className={styles.button} onClick={handleBack}>
+              {" "}
+              Back{" "}
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

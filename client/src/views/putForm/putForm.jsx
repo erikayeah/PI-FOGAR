@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { putPokemon } from '../../redux/actions'; // Asegúrate de importar la acción necesaria
-import { useNavigate, Link } from 'react-router-dom';
-import validation from '../../utils/validation';
-import styles from './PutForm.module.css'; // Asegúrate de tener los estilos adecuados
-import validationsPut from '../../utils/validation';
-
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { putPokemon } from "../../redux/actions";
+import { useNavigate, Link } from "react-router-dom";
+import validation from "../../utils/validation";
+import styles from "./PutForm.module.css";
+import validationsPut from "../../utils/validation";
 
 const PureForm = ({ selectedPokemon, onClose }) => {
   const dispatch = useDispatch();
@@ -13,7 +12,7 @@ const PureForm = ({ selectedPokemon, onClose }) => {
   const types = useSelector((state) => state.types);
 
   const [formData, setFormData] = useState({
-   name: "",
+    name: "",
     image: "",
     life: "",
     attack: "",
@@ -21,65 +20,67 @@ const PureForm = ({ selectedPokemon, onClose }) => {
     speed: "",
     height: "",
     weight: "",
-    types: []
-    });
+    types: [],
+  });
 
-    const [errors, setErrors] = useState({
-      name: "",
-      image: "",
-      life: "",
-      attack: "",
-      defense: "",
-      speed: "",
-      height: "",
-      weight: "",
-    });
+  const [errors, setErrors] = useState({
+    name: "",
+    image: "",
+    life: "",
+    attack: "",
+    defense: "",
+    speed: "",
+    height: "",
+    weight: "",
+  });
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      if (name === "type1" || name === "type2") {
-        // Si el nombre es 'type1' o 'type2', actualiza 'types' como un nuevo arreglo
-        setFormData((prevData) => ({ ...prevData, types: [...prevData.types, value] }));
-      } else {
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
-      }
-      validateInput(name, value);
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "type1" || name === "type2") {
+      // If the name is 'type1' or 'type2', update 'types' as a new array
+      setFormData((prevData) => ({
+        ...prevData,
+        types: [...prevData.types, value],
+      }));
+    } else {
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+    }
+    validateInput(name, value);
+  };
 
-    const validateInput = (name, value) => {
-      const newErrors = { ...errors };
-  
-      switch (name) {
-        case "name":
-        case "image":
-        case "life":
-        case "attack":
-        case "defense":
-        case "speed":
-        case "height":
-        case "weight":
-          case"totalStats":
-          newErrors[name] = validationsPut({ ...formData, [name]: value })[name];
-          break;
-        default:
-          break;
-      }
-  
-      const totalStats = ['life', 'attack', 'defense', 'speed'];
-      const totalStatsSum = totalStats.reduce((sum, field) => {
-        return sum + (formData[field] ? parseFloat(formData[field]) : 0);
-      }, 0);
-    
-      if (totalStatsSum > 250) {
-        newErrors.totalStats = 'Sum of life, attack, defense and speed cannot exceed 250 in total';
-      } else {
-        newErrors.totalStats = ''; 
-      }
-    
-      
-          setErrors(newErrors);
-        };
-  
+  const validateInput = (name, value) => {
+    const newErrors = { ...errors };
+
+    switch (name) {
+      case "name":
+      case "image":
+      case "life":
+      case "attack":
+      case "defense":
+      case "speed":
+      case "height":
+      case "weight":
+      case "totalStats":
+        newErrors[name] = validationsPut({ ...formData, [name]: value })[name];
+        break;
+      default:
+        break;
+    }
+
+    const totalStats = ["life", "attack", "defense", "speed"];
+    const totalStatsSum = totalStats.reduce((sum, field) => {
+      return sum + (formData[field] ? parseFloat(formData[field]) : 0);
+    }, 0);
+
+    if (totalStatsSum > 250) {
+      newErrors.totalStats =
+        "Sum of life, attack, defense and speed cannot exceed 250 in total";
+    } else {
+      newErrors.totalStats = "";
+    }
+
+    setErrors(newErrors);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,23 +88,16 @@ const PureForm = ({ selectedPokemon, onClose }) => {
     const formErrors = validation(formData);
     setErrors(formErrors);
 
-    if (Object.values(formErrors).some((error) => error !== '')) {
-      // Hay errores en el formulario, puedes mostrarlos o hacer algo más si es necesario
-      window.alert('There are errors in the form. Please fix them before submitting.');
+    if (Object.values(formErrors).some((error) => error !== "")) {
+      window.alert(
+        "There are errors in the form. Please fix them before submitting."
+      );
       return;
     }
-
-    // Aquí envías la solicitud de actualización al servidor
     dispatch(putPokemon(selectedPokemon.id, formData));
-
     navigate("/home");
-    //!!Pensar como traer id del back y navigate hacia eso.
-    
-      // Cerrar el formulario o realizar alguna otra acción después de la actualización
-      onClose();
-
-    };
-
+    onClose();
+  };
 
   return (
     <div className={styles.container}>
@@ -175,7 +169,9 @@ const PureForm = ({ selectedPokemon, onClose }) => {
             onChange={handleChange}
             required
           />
-          <span className={styles.error}>{errors.defense && errors.defense}</span>
+          <span className={styles.error}>
+            {errors.defense && errors.defense}
+          </span>
         </div>
 
         <div className={styles.formGroup}>
@@ -189,7 +185,9 @@ const PureForm = ({ selectedPokemon, onClose }) => {
             onChange={handleChange}
           />
           <span className={styles.error}>{errors.speed && errors.speed}</span>
-          <span className={styles.error}>{errors.totalStats && errors.totalStats}</span>
+          <span className={styles.error}>
+            {errors.totalStats && errors.totalStats}
+          </span>
         </div>
 
         <div className={styles.formGroup}>
@@ -218,10 +216,15 @@ const PureForm = ({ selectedPokemon, onClose }) => {
           <span className={styles.error}>{errors.weight && errors.weight}</span>
         </div>
 
-
         <span> Choose up to 2 types </span>
         <br />
-        <select className={styles.select} name="type1" value={formData.type1} onChange={handleChange} required>
+        <select
+          className={styles.select}
+          name="type1"
+          value={formData.type1}
+          onChange={handleChange}
+          required
+        >
           <option value="" disabled>
             Select first type
           </option>
@@ -229,14 +232,22 @@ const PureForm = ({ selectedPokemon, onClose }) => {
             <option
               key={type.id}
               value={type.name}
-              disabled={formData.types.includes(type.name) || formData.types.length >= 2}
+              disabled={
+                formData.types.includes(type.name) || formData.types.length >= 2
+              }
             >
               {type.name}
             </option>
           ))}
         </select>
 
-        <select className={styles.select} name="type2" value={formData.type2} onChange={handleChange} disabled={formData.type1 === ""}>
+        <select
+          className={styles.select}
+          name="type2"
+          value={formData.type2}
+          onChange={handleChange}
+          disabled={formData.type1 === ""}
+        >
           <option value="" disabled>
             Select second type
           </option>
@@ -247,31 +258,33 @@ const PureForm = ({ selectedPokemon, onClose }) => {
             <option
               key={type.id}
               value={type.name}
-              disabled={formData.types.includes(type.name) || formData.types.length >= 2}
+              disabled={
+                formData.types.includes(type.name) || formData.types.length >= 2
+              }
             >
               {type.name}
             </option>
           ))}
         </select>
 
-
-
-        <Link to={'/home'}>
-
-        <button
-          type="submit"
-          className={styles.button}
-          disabled={Object.values(errors).some((error) => error && error.length > 0)}
+        <Link to={"/home"}>
+          <button
+            type="submit"
+            className={styles.button}
+            disabled={Object.values(errors).some(
+              (error) => error && error.length > 0
+            )}
           >
-          <span className={styles.button_top} onClick={handleSubmit}> Update Pokemon </span>
-        </button>
-          </Link>
+            <span className={styles.button_top} onClick={handleSubmit}>
+              {" "}
+              Update Pokemon{" "}
+            </span>
+          </button>
+        </Link>
 
         <button type="button" className={styles.button} onClick={onClose}>
           <span className={styles.button_top}> Cancel </span>
         </button>
-
-
       </form>
     </div>
   );

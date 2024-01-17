@@ -1,137 +1,138 @@
-.container{ 
-   position: relative;
-   color: rgb(27, 1, 1);
-   border-radius: 13px;
-   width: 220px;
-   margin: 10px;
-   border-color: #000000;
-   }
+.container {
+  position: relative;
+  color: rgb(27, 1, 1);
+  border-radius: 13px;
+  width: 220px;
+  margin: 10px;
+  border-color: #000000;
+}
 
-   .container.normal {
-      background: linear-gradient(to bottom, #ffffff , #b3b3b3); /* Degradado de gris a blanco */
-  }
-  
-  .container.fighting {
-    background: linear-gradient(to top, #c03028, #ffffff);
-  }
-  
-  .container.flying {
-    background: linear-gradient(to top, #c9b7ff, #ffffff);
-  }
-  
-  .container.poison {
-    background: linear-gradient(to top, #a040a0, #ffffff);
-  }
-  
-  .container.ground {
-    background: linear-gradient(to top, #c2af7d, #ffffff);
-  }
-  
-  .container.rock {
-    background: linear-gradient(to top, #605938, #ffffff);
-  }
-  
-  .container.bug {
-    background: linear-gradient(to top, #a8b820, #ffffff);
-  }
-  
-  .container.ghost {
-    background: linear-gradient(to top, #705898, #ffffff);
-  }
-  
-  .container.steel {
-    background: linear-gradient(to top, #b8b8d0, #ffffff);
-  }
-  
-  .container.fire {
-    background: linear-gradient(to top, #f08030, #ffffff);
-  }
-  
-  .container.water {
-    background: linear-gradient(to top, #6890f0, #ffffff);
-  }
-  
-  .container.grass {
-    background: linear-gradient(to top, #78c850, #ffffff);
-  }
-  
-  .container.electric {
-    background: linear-gradient(to top, #f8d030, #ffffff);
-  }
-  
-  .container.psychic {
-    background: linear-gradient(to top, #f85888, #ffffff);
-  }
-  
-  .container.ice {
-    background: linear-gradient(to top, #a9ffff, #ffffff);
-  }
-  
-  .container.dragon {
-    background: linear-gradient(to top, #7038f8, #ffffff);
-  }
-  
-  .container.dark {
-    background: linear-gradient(to top, #1a1410, #ffffff);
-  }
-  
-  .container.fairy {
-    background: linear-gradient(to top, #ee99ac, #ffffff);
-  }
-  
-  .container.unknown {
-    background: linear-gradient(to top, #8874b0, #ffffff);
-  }
-  
-  .container.shadow {
-    background: linear-gradient(to top, #86a3c8, #ffffff);
-  }
-  
-   .image {
-      width: 50%;
-      height: 40%; /* Asegura que la altura se ajuste al contenedor */
-      margin: 2px;
-      position: relative;
-      object-fit: scale-down; /* La propiedad clave para ajustar la imagen */
-      object-position: center; /* Asegura que la imagen se centre dentro del contenedor */
-    }
+.container.normal {
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #b3b3b3
+  ); 
+}
 
-    .image img {
-      width: 100%; /* Hace que la imagen ocupe el 100% del contenedor */
-      height: auto; /* Mantiene la proporción original de la imagen */
-    }
+.container.fighting {
+  background: linear-gradient(to top, #c03028, #ffffff);
+}
 
-     
-     .h2{
-     color: #000000;
-     font-size: 25px;
-     border-radius: 50px;
-     padding: 5px;
-     margin: 5px;
-     text-transform: uppercase;
-     }
+.container.flying {
+  background: linear-gradient(to top, #c9b7ff, #ffffff);
+}
 
-     .button {
-      font-size: 17px;
-      font-weight: bold;
-      border: 1px solid #000000; /* Borde negro */
-      color: #000000;
-      padding: 5px;
-      background: #ffffff; /* Fondo gris claro */
-      border-radius: 5px;
-      margin: 3px;
-      font-family: 'VT323', monospace;
-      font-size: 20;
-      text-transform: uppercase;
-      cursor: pointer;
-     margin-bottom: 15px;
-      
-     }
+.container.poison {
+  background: linear-gradient(to top, #a040a0, #ffffff);
+}
 
-     .detail {
-      background-color: #ffffff;
-      width: 100%;
-      height: 12%;
-      object-fit: scale-down; /* La propiedad clave para ajustar la imagen */
+.container.ground {
+  background: linear-gradient(to top, #c2af7d, #ffffff);
+}
 
-     }
+.container.rock {
+  background: linear-gradient(to top, #605938, #ffffff);
+}
+
+.container.bug {
+  background: linear-gradient(to top, #a8b820, #ffffff);
+}
+
+.container.ghost {
+  background: linear-gradient(to top, #705898, #ffffff);
+}
+
+.container.steel {
+  background: linear-gradient(to top, #b8b8d0, #ffffff);
+}
+
+.container.fire {
+  background: linear-gradient(to top, #f08030, #ffffff);
+}
+
+.container.water {
+  background: linear-gradient(to top, #6890f0, #ffffff);
+}
+
+.container.grass {
+  background: linear-gradient(to top, #78c850, #ffffff);
+}
+
+.container.electric {
+  background: linear-gradient(to top, #f8d030, #ffffff);
+}
+
+.container.psychic {
+  background: linear-gradient(to top, #f85888, #ffffff);
+}
+
+.container.ice {
+  background: linear-gradient(to top, #a9ffff, #ffffff);
+}
+
+.container.dragon {
+  background: linear-gradient(to top, #7038f8, #ffffff);
+}
+
+.container.dark {
+  background: linear-gradient(to top, #1a1410, #ffffff);
+}
+
+.container.fairy {
+  background: linear-gradient(to top, #ee99ac, #ffffff);
+}
+
+.container.unknown {
+  background: linear-gradient(to top, #8874b0, #ffffff);
+}
+
+.container.shadow {
+  background: linear-gradient(to top, #86a3c8, #ffffff);
+}
+
+.image {
+  width: 50%;
+  height: 40%; 
+  margin: 2px;
+  position: relative;
+  object-fit: scale-down;
+  object-position: center;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+}
+
+.h2 {
+  color: #000000;
+  font-size: 25px;
+  border-radius: 50px;
+  padding: 5px;
+  margin: 5px;
+  text-transform: uppercase;
+}
+
+.button {
+  font-size: 17px;
+  font-weight: bold;
+  border: 1px solid #000000; 
+  color: #000000;
+  padding: 5px;
+  background: #ffffff; 
+  border-radius: 5px;
+  margin: 3px;
+  font-family: "VT323", monospace;
+  font-size: 20;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.detail {
+  background-color: #ffffff;
+  width: 100%;
+  height: 12%;
+  object-fit: scale-down; 
+}
