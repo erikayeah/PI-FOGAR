@@ -1,5 +1,6 @@
 // actions.js
 import axios from "axios";
+const URL_API = import.meta.env.VITE_URL_API;
 import {
   FETCH_POKEMONS_SUCCESS,
   FETCH_POKEMONS_FAILURE,
@@ -20,7 +21,7 @@ import {
   RESET_FILTER,
 } from "./action-types";
 
-const URL = "http://localhost:3001/pokemon";
+const URL = `${URL_API}/pokemon`;
 
 //* Put pokemon
 export const putPokemon = (pokemonId, updatedData) => async (dispatch) => {
