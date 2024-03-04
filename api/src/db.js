@@ -2,16 +2,21 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const axios = require("axios"); 
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const axios = require("axios");
+const { DB_RENDER_URL } = process.env;
 
-const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,
-  {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  }
-);
+const sequelize = new Sequelize(DB_RENDER_URL, {
+  logging: false,
+  native: false,
+  dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
+});
+// const sequelize = new Sequelize(
+//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,
+//   {
+//     logging: false, // set to console.log to see the raw SQL queries
+//     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+//   }
+// );
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -36,7 +41,6 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-
 const { Pokemons, Type } = sequelize.models;
 
 // Funtion to get Types from API
@@ -57,13 +61,12 @@ const initializeTypes = async () => {
   }
 };
 
-
 Pokemons.belongsToMany(Type, { through: "pokemon_type" });
 Type.belongsToMany(Pokemons, { through: "pokemon_type" });
 
 module.exports = {
   Pokemons,
-  Type, 
+  Type,
   conn: sequelize,
   initializeTypes, // para importart la conexión { conn } = require('./db.js');
 };

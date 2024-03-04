@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { putPokemon } from "../../redux/actions";
 import { useNavigate, Link } from "react-router-dom";
 import validation from "../../utils/validation";
-import styles from "./PutForm.module.css";
+import styles from "./putForm.module.css";
 import validationsPut from "../../utils/validation";
 
 const PureForm = ({ selectedPokemon, onClose }) => {
