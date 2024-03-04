@@ -11,11 +11,11 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.backgroundImage = { landing };
+    document.body.style.backgroundImage = `url(${landing})`;
     return () => {
       document.body.style.backgroundImage = null;
     };
-  }, []);
+  }, [landing]);
 
   const handleHome = () => {
     navigate("/home");
