@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { initializeTypes } = require("../db"); // 
+const { initializeTypes } = require("../db"); //
 // Hanlders;
 const getPokemonsHandler = require("../handlers/getPokemonsHandler");
 const getPokemonByNameHandler = require("../handlers/getPokemonByNameHandler");
@@ -32,7 +32,7 @@ router.get("/type", getTypesHandler);
 
 router.delete("/delete/:id", deletePokemonHandler);
 router.put("/put/:id", putPokemonHandler);
-router.get("/:id", getPokemonByIdHandler); 
+router.get("/:id", getPokemonByIdHandler);
 
 router.use((req, res, next) => {
   const error = new Error("Route not found");
